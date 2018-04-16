@@ -3,6 +3,14 @@ import {render} from 'react-dom';
 import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 
+/**
+ * @description 
+ * 实现一个tab选项卡组件，可以通过遍历实现任意个数，并且可以进行内容切换，
+ * 刷新页面时依旧显示当前tab选项卡和对应的页面
+ * @author wangkaiwd
+ * @export
+ * @class MyTabs
+ */
 export default class MyTabs extends Component {
     constructor(){
         super();
