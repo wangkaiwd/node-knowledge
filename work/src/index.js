@@ -1,6 +1,5 @@
 import React from 'react';
 import {render} from 'react-dom'
+import Route from './router/routes'
 
-import Tabs from './tabs';
-
-render(<Tabs />, document.getElementById('box'));
+render(<Route />, document.getElementById('box'));
