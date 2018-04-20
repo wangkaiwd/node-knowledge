@@ -40,6 +40,7 @@
     "antd": "^3.3.1",
     "babel-plugin-import": "^1.6.7",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "eslint": "^4.19.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",

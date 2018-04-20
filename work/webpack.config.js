@@ -9,7 +9,7 @@ module.exports = {
     entry: {
         app: './src/index.js',
         // 需要分离的js文件名
-        vendor: ["vue"]
+        // vendor: ["vue"]
     },
     // 设置文件的导出路径
     output: {
@@ -25,10 +25,10 @@ module.exports = {
                 exclude: /node_modules/, // 忽略,不处理 node_modules中的js文件
             },
             // 配置解析.vue文件的加载器
-            {
-                test: /\.vue$/,
-                use: 'vue-loader'
-            },
+            // {
+            //     test: /\.vue$/,
+            //     use: 'vue-loader'
+            // },
             // 配置解析.css文件的加载器
             {
                 test: /\.css$/,
@@ -50,6 +50,14 @@ module.exports = {
             }
 
         ]
+    },
+    resolve: {
+        // 配置别名，方便路径引入
+        alias: {
+            component: path.resolve(__dirname, 'src/component'),
+            style: path.resolve(__dirname, 'src/style'),
+            src: path.resolve(__dirname, 'src'),
+        }
     },
 
     // webpack-dev-server的一些配置信息
