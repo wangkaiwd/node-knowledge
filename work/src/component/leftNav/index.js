@@ -8,13 +8,13 @@ import {
     Redirect,
     Link,
 } from 'react-router-dom'
+import "./leftNav.less"
 import Home from "src/pages/home";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 const { Header, Sider, Content } = Layout;
-
 
 export default class LeftNav extends Component {
     constructor() {
@@ -38,7 +38,7 @@ export default class LeftNav extends Component {
         */
         const { history } = this.props;
         return (
-            <Layout>
+            <Layout className="leftnav">
                 <Sider
                     trigger={null}
                     collapsible
@@ -57,14 +57,14 @@ export default class LeftNav extends Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header style={{ background: '#fff', padding: 0 }}>
+                    <Header className="leftnav-header">
                         <Icon
                             className="trigger"
                             type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                             onClick={this.toggle}
                         />
                     </Header>
-                    <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+                    <Content className="leftnav-content">
                         <Switch>
                             <Route path="/tab" component={Home} />
                         </Switch>

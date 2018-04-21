@@ -13,3 +13,13 @@
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
+.leftnav .leftnav-header {
+  background-color: #fff;
+  padding: 0;
+}
+.leftnav .leftnav-content {
+  margin: 24px 16px;
+  padding: 24px;
+  background: '#fff';
+  min-height: 280px;
+}
