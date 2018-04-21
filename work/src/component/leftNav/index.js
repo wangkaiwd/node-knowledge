@@ -1,6 +1,14 @@
 import { Menu, Icon, Button, Layout } from 'antd';
 import React, { Component } from 'react';
 import { leftNavConfig } from 'src/config';
+import {
+    HashRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+    Link,
+} from 'react-router-dom'
+import Home from "src/pages/home";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -15,12 +23,20 @@ export default class LeftNav extends Component {
             collapsed: false,
         };
     }
+    // 左侧导航的收合
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
         });
     }
     render() {
+        /**
+         * 如果父组件中没有配置路由的话
+         * this.props对象中是不会有关于路由的对象的
+         * 像this.props.history.push,this.props.match是没有办法使用的
+         * 
+        */
+        const { history } = this.props;
         return (
             <Layout>
                 <Sider
@@ -34,7 +50,7 @@ export default class LeftNav extends Component {
                             leftNavConfig.map(item => (
                                 <Menu.Item key={item.key}>
                                     <Icon type={item.icon} />
-                                    <span>{item.content}</span>
+                                    <span onClick={() => history.push(item.href)}>{item.content}</span>
                                 </Menu.Item>
                             ))
                         }
@@ -49,7 +65,9 @@ export default class LeftNav extends Component {
                         />
                     </Header>
                     <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-                        Content
+                        <Switch>
+                            <Route path="/tab" component={Home} />
+                        </Switch>
                     </Content>
                 </Layout>
             </Layout>

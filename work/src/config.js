@@ -5,7 +5,22 @@
 
 // 左侧导航配置文件
 export const leftNavConfig = [
-    { key: '1', icon: 'switcher', content: 'tab切换' },
-    { key: '2', icon: 'table', content: '表格' },
-    { key: '3', icon: 'folder-add', content: '模态框' }
+    {
+        key: '1',
+        icon: 'switcher',
+        content: 'tab切换',
+        href: '/tab',
+    },
+    {
+        key: '2',
+        icon: 'table',
+        content: '表格',
+        href: '/table',
+    },
+    {
+        key: '3',
+        icon: 'folder-add',
+        content: '模态框',
+        href: '/modal',
+    }
 ]
