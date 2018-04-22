@@ -28,11 +28,19 @@ export default class App extends Component {
 
                     <Switch>
                         {/* Switch只会匹配到第一个符合要求的路由 */}
-                        <Route path="/" exact component={Index} />
                         <Route path="/index" component={Index} />
                         <Route path="/about" component={About} />
                         <Route path="/topics" component={Topics} />
-                        {/* <Redirect to="/" /> */}
+                        {/* 不管匹配到什么路径都会跳转到 "/",有于使用Switch,已配置的路由不会跳转到'/index' */}
+                        <Redirect to="/index" />
+                        {/** 
+                            当匹配到'/about'的时候会跳转到'/index',
+                            但是由于使用了Switch，会在匹配到'/about'时停止匹配
+                            所以这样写并不会生效
+
+                            但是在匹配到其它路径的时候还是会返回'/index'
+                        */}
+                        {/* <Redirect form="/about" to="/index" /> */}
                     </Switch>
                 </div>
             </Router>

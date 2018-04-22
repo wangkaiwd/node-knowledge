@@ -9,25 +9,39 @@ import {
     Link,
 } from 'react-router-dom'
 import "./leftNav.less"
-import Home from "src/pages/home";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 const { Header, Sider, Content } = Layout;
-
+/**
+ * @todo:
+ * 1. 当有子菜单时还要进行遍历
+ * 2. 路由到4.0后，组件对应的路由属性获取方式
+ */
 export default class LeftNav extends Component {
     constructor() {
         super();
         this.state = {
             collapsed: false,
+            defaultSelectedKeys: ['1'],
         };
+    }
+    componentWillMount = () => {
+        this.setDefault();
     }
     // 左侧导航的收合
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
         });
+    }
+    // 设置默认激活id
+    setDefault = () => {
+        const { pathname } = this.props.location;
+        leftNavConfig.map(
+            item => item.href === pathname && this.setState({ defaultSelectedKeys: [item.key] })
+        )
     }
     render() {
         /**
@@ -36,7 +50,6 @@ export default class LeftNav extends Component {
          * 像this.props.history.push,this.props.match是没有办法使用的
          * 
         */
-        const { history } = this.props;
         return (
             <Layout className="leftnav">
                 <Sider
@@ -45,12 +58,16 @@ export default class LeftNav extends Component {
                     collapsed={this.state.collapsed}
                 >
                     <div className="logo" />
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                    <Menu
+                        theme="dark"
+                        onClick={(e) => this.props.history.push(leftNavConfig[e.key - 1].href)}
+                        mode="inline"
+                        defaultSelectedKeys={this.state.defaultSelectedKeys}>
                         {
                             leftNavConfig.map(item => (
                                 <Menu.Item key={item.key}>
                                     <Icon type={item.icon} />
-                                    <span onClick={() => history.push(item.href)}>{item.content}</span>
+                                    <span>{item.content}</span>
                                 </Menu.Item>
                             ))
                         }
@@ -66,7 +83,16 @@ export default class LeftNav extends Component {
                     </Header>
                     <Content className="leftnav-content">
                         <Switch>
-                            <Route path="/tab" component={Home} />
+                            {
+                                leftNavConfig.map(
+                                    item => <Route
+                                        path={item.href}
+                                        component={item.component}
+                                        key={item.key}
+                                    />)
+                            }
+                            {/* 由于使用了Switch,所以在匹配到其它自己没有配置的路由会跳转到'/tab' */}
+                            <Redirect to="/tab" />
                         </Switch>
                     </Content>
                 </Layout>

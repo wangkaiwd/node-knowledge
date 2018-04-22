@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom'
-import Route from './router/routes'
+// import Route from './router/routes'
+import { HashRouter as Router } from 'react-router-dom'
+import App from './app'
 import "./style/common.less"
 
-render(<Route />, document.getElementById('box'));
+render(<Router><App /></Router>, document.getElementById('box'));

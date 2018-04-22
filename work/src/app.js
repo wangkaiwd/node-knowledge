@@ -21,7 +21,9 @@ export default class App extends Component {
         return (
             <LocaleProvider className="page" locale={zh_CN}>
                 <div className="page-content">
-                    <LeftNav />
+                    <Switch>
+                        <Route path="/" component={LeftNav} />
+                    </Switch>
                 </div>
             </LocaleProvider>
         )

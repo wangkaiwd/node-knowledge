@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import MyTabs from '../component/tabs/index';
+import MyTabs from 'component/tabs';
+import { Switch, Route, Redirect } from 'react-router-dom';
 export default class Home extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             tabConfig: [
                 { title: '主页', key: '1', content: Con1 },
@@ -11,10 +12,14 @@ export default class Home extends Component {
         }
     }
     render() {
+        console.log('this', this);
+        const { history, path } = this.props.match.path;
         return (
             <div>
                 <MyTabs
                     tabConfig={this.state.tabConfig}
+                    history={this.props.history}
+                    path={path}
                 />
             </div>
         )

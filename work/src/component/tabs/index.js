@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Tabs } from 'antd';
+import { Switch, } from 'react-router-dom'
 const TabPane = Tabs.TabPane;
 import './tabs.css';
 /**
@@ -15,19 +16,35 @@ import './tabs.css';
  *  2. 将激活tab的索引值存入sessionStorage中
  */
 export default class MyTabs extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeKey: '1',
+        }
+    }
+    componentWillMount = () => {
+
     }
     render() {
-        const { tabConfig } = this.props
+        const { tabConfig, history, path } = this.props
+        // console.log('props', this.props);
         return (
             <div className="tabs">
-                <Tabs defaultActiveKey="1">
-                    {tabConfig.map( item => (
-                        <TabPane tab={item.title} key={item.key}>{<item.content/>}</TabPane>
+                <Tabs activeKey={this.state.activeKey} onTabClick={(e) => {
+                    // debugger
+                    this.setState({ activeKey: e });
+                    history.push({
+                        pathname: path,
+                        query: {
+                            status: '1'
+                        }
+                    })
+                }}>
+                    {tabConfig.map(item => (
+                        <TabPane tab={item.title} key={item.key}> {<item.link />} </TabPane>
                     ))}
                 </Tabs>
-            </div>
+            </div >
         )
     }
 }
