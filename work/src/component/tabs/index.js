@@ -25,21 +25,16 @@ export default class MyTabs extends Component {
     componentWillMount = () => {
 
     }
+    handleTabClick = (e) => {
+        const { history, path } = this.props
+        this.setState({ activeKey: e });
+    }
     render() {
-        const { tabConfig, history, path } = this.props
+        const { tabConfig } = this.props
         // console.log('props', this.props);
         return (
             <div className="tabs">
-                <Tabs activeKey={this.state.activeKey} onTabClick={(e) => {
-                    // debugger
-                    this.setState({ activeKey: e });
-                    history.push({
-                        pathname: path,
-                        query: {
-                            status: '1'
-                        }
-                    })
-                }}>
+                <Tabs activeKey={this.state.activeKey} onTabClick={this.handleTabClick}>
                     {tabConfig.map(item => (
                         <TabPane tab={item.title} key={item.key}> {<item.link />} </TabPane>
                     ))}

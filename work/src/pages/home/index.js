@@ -6,20 +6,18 @@ export default class Home extends Component {
         super(props);
         this.state = {
             tabConfig: [
-                { title: '主页', key: '1', content: Con1 },
-                { title: '商品', key: '2', content: Con2 }
+                { title: '主页', key: '1', link: Con1 },
+                { title: '商品', key: '2', link: Con2 }
             ]
         }
     }
     render() {
-        console.log('this', this);
-        const { history, path } = this.props.match.path;
         return (
             <div>
                 <MyTabs
                     tabConfig={this.state.tabConfig}
                     history={this.props.history}
-                    path={path}
+                    path={this.props.match.path}
                 />
             </div>
         )

@@ -18,6 +18,7 @@ const { Header, Sider, Content } = Layout;
  * @todo:
  * 1. 当有子菜单时还要进行遍历
  * 2. 路由到4.0后，组件对应的路由属性获取方式
+ * 3. 设置头部左侧的个人信息
  */
 export default class LeftNav extends Component {
     constructor() {
@@ -57,7 +58,18 @@ export default class LeftNav extends Component {
                     collapsible
                     collapsed={this.state.collapsed}
                 >
-                    <div className="logo" />
+                    <div className="admin">
+                        <div className="logo" >
+                            <img src="assets/logo.jpg" alt="" />
+                        </div>
+                        {
+                            this.state.collapsed ||
+                            <div className="text f-c">
+                                react & antd
+                            </div>
+                        }
+
+                    </div>
                     <Menu
                         theme="dark"
                         onClick={(e) => this.props.history.push(leftNavConfig[e.key - 1].href)}
@@ -71,6 +83,20 @@ export default class LeftNav extends Component {
                                 </Menu.Item>
                             ))
                         }
+                        {/* <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
+                            <Menu.Item key="5">Option 5</Menu.Item>
+                            <Menu.Item key="6">Option 6</Menu.Item>
+                            <Menu.Item key="7">Option 7</Menu.Item>
+                            <Menu.Item key="8">Option 8</Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
+                            <Menu.Item key="9">Option 9</Menu.Item>
+                            <Menu.Item key="10">Option 10</Menu.Item>
+                            <SubMenu key="sub3" title="Submenu">
+                                <Menu.Item key="11">Option 11</Menu.Item>
+                                <Menu.Item key="12">Option 12</Menu.Item>
+                            </SubMenu>
+                        </SubMenu> */}
                     </Menu>
                 </Sider>
                 <Layout>
@@ -80,6 +106,10 @@ export default class LeftNav extends Component {
                             type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                             onClick={this.toggle}
                         />
+                        <div className="personal-center">
+                            <Button className="ell" icon="github">github</Button>
+                            <Button className="ell" title="wangkaiwd" icon="user">wangkaiwd</Button>
+                        </div>
                     </Header>
                     <Content className="leftnav-content">
                         <Switch>

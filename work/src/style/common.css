@@ -31,3 +31,17 @@ html {
 #box .page-content {
   height: 100%;
 }
+.ell {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.f-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+img {
+  width: 100%;
+  height: auto;
+}
