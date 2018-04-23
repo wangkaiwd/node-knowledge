@@ -26,12 +26,12 @@ const columns = [
         key: 'action',
         render: (text, record) => (
             <span>
-                <a href="javascript:;">Action 一 {record.name}</a>
+                <a href="javascript:;">详情</a>
                 <Divider type="vertical" />
-                <a href="javascript:;">Delete</a>
+                <a href="javascript:;">删除</a>
                 <Divider type="vertical" />
-                <a href="javascript:;" className="ant-dropdown-link">
-                    More actions <Icon type="down" />
+                <a href="javascript:;">
+                    编辑
                 </a>
             </span>
         ),
@@ -44,6 +44,9 @@ export default class List extends Component {
             dataSource: [],
             loading: false,
         }
+    }
+    componentWillMount = () => {
+        this.props.onRef(this);
     }
     componentDidMount = () => {
         this.getList();

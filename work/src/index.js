@@ -4,5 +4,6 @@ import { render } from 'react-dom'
 import { HashRouter as Router } from 'react-router-dom'
 import App from './app'
 import "./style/common.less"
+import "./style/base.less";
 
 render(<Router><App /></Router>, document.getElementById('box'));

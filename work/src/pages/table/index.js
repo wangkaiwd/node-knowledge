@@ -5,42 +5,58 @@ import {
     Divider,
     Form,
     Input,
+    Row,
+    Col,
+    Button,
 } from 'antd';
 import List from './List';
-// const FormItem = Form.Item;
 
-
-
+const FormItem = Form.Item;
 
 // Form.create({})
-export default class MyTable extends Component {
+class MyTable extends Component {
     constructor() {
         super();
         this.state = {
+            List: {}
         }
     }
     render() {
-        // const { getFieldDecorator } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         return (
             <div className="mytab">
-                <div className="search">
-                    {/* <Form>
-                        <FormItem>
-                            {getFieldDecorator('userName', )(
-                                <Input placeholder="姓名" />
-                            )}
-                        </FormItem>
-                        <FormItem>
-                            {getFieldDecorator('userName', )(
-                                <Input placeholder="年龄" />
-                            )}
-                        </FormItem>
-                    </Form> */}
+                <div className="search-header">
+                    <Form layout="inline">
+                        <Row>
+                            <Col span={12}>
+                                <FormItem>
+                                    {getFieldDecorator('userName', )(
+                                        <Input placeholder="请输入姓名" />
+                                    )}
+                                </FormItem>
+                                <FormItem>
+                                    {getFieldDecorator('userName', )(
+                                        <Input placeholder="请输入年龄" />
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={12}>
+                                <FormItem>
+                                    <Button type="primary" icon="search">搜索</Button>
+                                    <Button className="btn-reset">重置</Button>
+                                </FormItem>
+                            </Col>
+                        </Row>
+                    </Form>
                 </div>
                 <div className="tablelist">
-                    <List />
+                    <List
+                        onRef={(List) => this.setState({ List })}
+                    />
                 </div>
             </div>
         )
     }
 }
+// 注册表单的双向数据绑定
+export default Form.create()(MyTable);

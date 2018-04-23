@@ -16,6 +16,8 @@
 .leftnav .leftnav-header {
   background-color: #fff;
   padding: 0;
+  height: 50px;
+  line-height: 50px;
 }
 .leftnav .leftnav-content {
   margin: 12px 12px;
@@ -35,7 +37,7 @@
 }
 .leftnav .trigger {
   cursor: pointer;
-  padding-left: 8px;
+  padding-left: 12px;
   font-size: 16px;
 }
 .leftnav .trigger:hover {
@@ -55,4 +57,5 @@
 }
 .leftnav .ant-menu-inline .ant-menu-item {
   margin-top: 0;
+  font-size: 14px;
 }
