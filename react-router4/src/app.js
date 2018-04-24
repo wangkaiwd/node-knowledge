@@ -32,7 +32,7 @@ export default class App extends Component {
                         <Route path="/about" component={About} />
                         <Route path="/topics" component={Topics} />
                         {/* 不管匹配到什么路径都会跳转到 "/",有于使用Switch,已配置的路由不会跳转到'/index' */}
-                        <Redirect to="/index" />
+                        {/* <Redirect to="/index" /> */}
                         {/** 
                             当匹配到'/about'的时候会跳转到'/index',
                             但是由于使用了Switch，会在匹配到'/about'时停止匹配
@@ -49,8 +49,19 @@ export default class App extends Component {
 }
 
 // 首页
-const Index = () => <div>首页</div>
+const Index = () => (
+    <div>
+        首页
+        <Switch>
+            <Route path="/hello" component={Hello} />
+            <Route path="/hehe" component={Hehe} />
+        </Switch>
+    </div>
+)
 // 关于
 const About = () => <div>关于</div>
 // 主题列表
 const Topics = () => <div>主题列表</div>
+
+const Hello = () => <h2>你好</h2>
+const Hehe = () => <h2>呵呵</h2>

@@ -13,7 +13,6 @@ import List from './List';
 
 const FormItem = Form.Item;
 
-// Form.create({})
 class MyTable extends Component {
     constructor() {
         super();

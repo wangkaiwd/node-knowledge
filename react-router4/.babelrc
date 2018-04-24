@@ -1,7 +1,18 @@
 {
-  "presets": ["env", "react"],
+  "presets": [
+    "env",
+    "react",
+    "stage-3"
+  ],
   "plugins": [
     "transform-class-properties",
-    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": "css"
+      }
+    ]
   ]
 }

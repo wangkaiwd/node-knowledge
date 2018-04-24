@@ -1,9 +1,9 @@
-/**
- * @description: 全局的配置文件
- */
+
+import React from 'react'
 import Home from 'src/pages/home'
 import MyTable from 'src/pages/table'
 import MyModal from 'src/pages/modal'
+const Option = () => <div>option</div>
 // 左侧导航配置文件
 export const leftNavConfig = [
     {
@@ -24,29 +24,27 @@ export const leftNavConfig = [
         key: '3',
         icon: 'folder-add',
         content: '模态框',
-        href: '/modal',
-        component: MyModal,
-    },
-    {
-        key: 'sub1',
-        icon: 'mail',
-        content: '文件夹',
-        // href: '/folder',
-        // component: 'Folder',
         child: [
             {
-                key: '4',
+                key: '3-1',
+                icon: '',
+                href: '/modal',
+                content: 'option1',
+                component: MyModal,
+            }
+        ]
+    },
+    {
+        key: '4',
+        icon: 'mail',
+        content: '文件夹',
+        child: [
+            {
+                key: '4-1',
                 icon: '',
                 content: 'option1',
-                // href: '/folder/option1',
-                // component: Option1
-                child: [
-                    {
-                        key: 's-sub1',
-                        icon: '',
-                        content: 's-option1'
-                    }
-                ]
+                href: '/option',
+                component: Option,
             },
         ]
     }
