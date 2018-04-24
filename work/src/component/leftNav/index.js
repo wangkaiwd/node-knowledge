@@ -44,6 +44,31 @@ export default class LeftNav extends Component {
             item => item.href === pathname && this.setState({ defaultSelectedKeys: [item.key] })
         )
     }
+    // 递归生成二级菜单
+    renderSubMenu = (menuTree) => {
+        // console.log('menuTree', menuTree);
+        return (
+            <SubMenu
+                key={menuTree.key}
+                title={
+                    <span>
+                        <Icon type={menuTree.icon} />
+                        <span>{menuTree.content}</span>
+                    </span>
+                }
+            >
+                {
+                    menuTree.child.map(
+                        sub => {
+                            console.log(sub);
+                            if (sub.child) return this.renderSubMenu(sub);
+                            return <Menu.Item key={sub.key}>{sub.content}</Menu.Item>
+                        }
+                    )
+                }
+            </SubMenu>
+        )
+    }
     render() {
         /**
          * 如果父组件中没有配置路由的话
@@ -75,28 +100,17 @@ export default class LeftNav extends Component {
                         onClick={(e) => this.props.history.push(leftNavConfig[e.key - 1].href)}
                         mode="inline"
                         defaultSelectedKeys={this.state.defaultSelectedKeys}>
-                        {
-                            leftNavConfig.map(item => (
+                        {leftNavConfig.map(item => {
+                            // debugger;
+                            if (item.child) return this.renderSubMenu(item)
+                            return (
                                 <Menu.Item key={item.key}>
                                     <Icon type={item.icon} />
                                     <span>{item.content}</span>
                                 </Menu.Item>
-                            ))
-                        }
-                        {/* <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
-                            <Menu.Item key="5">Option 5</Menu.Item>
-                            <Menu.Item key="6">Option 6</Menu.Item>
-                            <Menu.Item key="7">Option 7</Menu.Item>
-                            <Menu.Item key="8">Option 8</Menu.Item>
-                        </SubMenu>
-                        <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
-                            <Menu.Item key="9">Option 9</Menu.Item>
-                            <Menu.Item key="10">Option 10</Menu.Item>
-                            <SubMenu key="sub3" title="Submenu">
-                                <Menu.Item key="11">Option 11</Menu.Item>
-                                <Menu.Item key="12">Option 12</Menu.Item>
-                            </SubMenu>
-                        </SubMenu> */}
+                            )
+                        })}
+
                     </Menu>
                 </Sider>
                 <Layout>
@@ -113,16 +127,16 @@ export default class LeftNav extends Component {
                     </Header>
                     <Content className="leftnav-content">
                         <Switch>
-                            {
+                            {/* {
                                 leftNavConfig.map(
                                     item => <Route
                                         path={item.href}
                                         component={item.component}
                                         key={item.key}
                                     />)
-                            }
+                            } */}
                             {/* 由于使用了Switch,所以在匹配到其它自己没有配置的路由会跳转到'/tab' */}
-                            <Redirect to="/tab" />
+                            {/* <Redirect to="/tab" /> */}
                         </Switch>
                     </Content>
                 </Layout>

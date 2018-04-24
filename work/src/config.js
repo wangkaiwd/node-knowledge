@@ -26,5 +26,28 @@ export const leftNavConfig = [
         content: '模态框',
         href: '/modal',
         component: MyModal,
+    },
+    {
+        key: 'sub1',
+        icon: 'mail',
+        content: '文件夹',
+        // href: '/folder',
+        // component: 'Folder',
+        child: [
+            {
+                key: '4',
+                icon: '',
+                content: 'option1',
+                // href: '/folder/option1',
+                // component: Option1
+                child: [
+                    {
+                        key: 's-sub1',
+                        icon: '',
+                        content: 's-option1'
+                    }
+                ]
+            },
+        ]
     }
 ]
