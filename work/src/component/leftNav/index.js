@@ -1,4 +1,11 @@
-import { Menu, Icon, Button, Layout } from 'antd';
+import {
+  Menu,
+  Icon,
+  Button,
+  Layout,
+  Card,
+  Avatar,
+} from 'antd';
 import React, { Component } from 'react';
 import { leftNavConfig } from 'src/config';
 import {
@@ -10,6 +17,7 @@ import {
 } from 'react-router-dom'
 import "./leftNav.less"
 
+const { Meta } = Card;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
@@ -120,7 +128,7 @@ export default class LeftNav extends Component {
           collapsible
           collapsed={this.state.collapsed}
         >
-          <div className="admin">
+          {/* <div className="admin">
             <div className="logo" >
               <img src="assets/logo.jpg" alt="" />
             </div>
@@ -131,6 +139,16 @@ export default class LeftNav extends Component {
                             </div>
             }
 
+          </div> */}
+          <div className="logo">
+            <Card
+            >
+              <Meta
+                className={this.state.collapsed ? "hide" : "show"}
+                avatar={<Avatar src="assets/logo.jpg" />}
+                description={this.state.collapsed || "to be stronger"}
+              />
+            </Card>
           </div>
           <Menu
             theme="dark"

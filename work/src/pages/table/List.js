@@ -55,9 +55,10 @@ export default class List extends Component {
   getList = () => {
     this.setState({ loading: true })
     axios.get('http://cangdu.org:8001/shopping/restaurants?latitude=31.22967&longitude=121.4762').then(
-      ({ data }) => {
+      (res) => {
+        console.log(res);
         this.setState({
-          dataSource: data,
+          dataSource: res.data,
           loading: false
         });
       });

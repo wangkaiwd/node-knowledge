@@ -12,7 +12,7 @@ class Login extends Component {
   }
   // 提交登录信息
   handleSubmit = () => {
-    this.props.history.push(`/leftnav`);
+    this.props.history.push(`/index`);
   }
   render() {
     const { getFieldDecorator } = this.props.form;

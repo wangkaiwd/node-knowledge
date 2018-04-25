@@ -5,5 +5,6 @@ import { HashRouter as Router } from 'react-router-dom'
 import App from './app'
 import "./style/common.less"
 import "./style/base.less";
+import { message } from 'antd'
 
 render(<Router><App /></Router>, document.getElementById('box'));

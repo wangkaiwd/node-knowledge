@@ -24,3 +24,24 @@
 ### `javascript`小知识  
 1. 如果`if`语句写在一行的话可以省略`{}`，**并不是省略  `return`**  
    函数如果写为一行的话，相当于**省略`{}`和`return`**
+
+
+
+### `http`请求封装（`axios`）
+`axios`发送`ajax`请求成功后返回的内容  
+```js
+const res = {
+  // 服务器返回的数据
+  data: {},
+  // http状态码
+  status: 200,
+  // 服务器返回的消息
+  statusText: 'OK',
+  // 返回头
+  headers: {},
+  // 返回我们的配置
+  config: {},
+  // 生成这次响应的请求
+  request: {}
+}
+```

@@ -22,7 +22,7 @@ export default class App extends Component {
         <div className="page-content">
           <Switch>
             <Route path="/login" exact component={Login} />
-            <Route path="/leftnav" component={LeftNav} />
+            <Route path="/index" component={LeftNav} />
             <Redirect to="/login" />
           </Switch>
         </div>
