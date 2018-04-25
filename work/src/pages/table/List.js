@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import TabList from 'component/tablist';
-import axios from 'axios';
+import {
+  fetchRestaurantsList,
+  fetchRestaurantsCount
+} from "src/http/api"
 import { Divider, Icon } from 'antd'
 const columns = [
   {
@@ -37,12 +40,29 @@ const columns = [
     ),
   }
 ];
+/**
+ * TODO:
+ * 1. 数据总条数获取
+ * 2. 进行分页和表格列表组件的封装
+ */
 export default class List extends Component {
   constructor() {
     super();
     this.state = {
       dataSource: [],
       loading: false,
+      total: 0,
+    }
+    // 分页
+    this.pageKey = {
+      offset: 0,
+      limit: 10,
+    }
+  }
+  initPageKey = () => {
+    this.pageKey = {
+      offset: 0,
+      limit: 10,
     }
   }
   componentWillMount = () => {
@@ -50,35 +70,48 @@ export default class List extends Component {
   }
   componentDidMount = () => {
     this.getList();
+    this.getCount();
   }
-  // 获取表格列表
-  getList = () => {
+  // 获取参观列表
+  getList = (searchKey) => {
+    const params = {
+      ...this.pageKey,
+      ...searchKey,
+    };
     this.setState({ loading: true })
-    axios.get('http://cangdu.org:8001/shopping/restaurants?latitude=31.22967&longitude=121.4762').then(
-      (res) => {
-        console.log(res);
-        this.setState({
-          dataSource: res.data,
-          loading: false
-        });
-      });
+    fetchRestaurantsList(params, res => {
+      this.setState({
+        dataSource: res,
+        loading: false,
+      })
+    });
   }
-  // 可以将每个组件的配置对象单独写，然后通过扩展运算符写入
-  tableProps = () => {
-    return {
-      rowKey: "id",
-      bordered: true,
-      columns,
-      scroll: { y: 376 },
-      // 安装babel后才支持这样写
-      ...this.state,
-    }
+  // 获取餐馆数量
+  getCount = () => {
+    fetchRestaurantsCount({}, (res) => this.setState({ total: res.count }));
+  }
+  // 改变页数
+  pageChange = (page) => {
+    this.pageKey.offset = (page - 1) * this.pageKey.limit;
+    this.getList();
+  }
+  // 改变每页条数
+  pageSizeChange = (current, pageSize) => {
+    this.pageKey.offset = 0;
+    this.pageKey.limit = pageSize;
+    this.getList();
   }
   render() {
-    // 调用this.setState()方法之后会调用render()方法，会重新执行tableProps()方法
-    const tableProps = this.tableProps();
     return (
-      <TabList {...tableProps} />
+      <TabList
+        {...this.state}
+        columns={columns}
+        scroll={{ y: 400 }}
+        current={this.pageKey.offset / 10 + 1}
+        pageSize={this.pageKey.limit}
+        onChange={this.pageChange}
+        onShowSizeChange={this.pageSizeChange}
+      />
     )
   }
 }

@@ -6,16 +6,32 @@ export default class TabList extends Component {
     super()
   }
   render() {
+    const {
+      rowKey,
+      bordered,
+      total,
+      pageSize,
+      current,
+      onChange,
+      onShowSizeChange,
+      ...tableProps,
+    } = this.props;
     return (
       <div className="tablist">
         <Table
-          {...this.props}
+          {...tableProps}
+          rowKey={rowKey || "id"}
+          bordered={bordered || true}
           pagination={false}
         />
         <Pagination
-          total={85}
+          total={total}
           showTotal={total => `共 ${total} 条`}
-          pageSize={20}
+          current={current}
+          pageSize={pageSize}
+          onChange={onChange}
+          onShowSizeChange={onShowSizeChange}
+          showSizeChanger={true}
           defaultCurrent={1}
         />
       </div>

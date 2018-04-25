@@ -1,6 +1,9 @@
 .search-header {
   padding: 10px 12px;
-  background-color: #1890ff12;
+  opacity: 0.8;
+  background-color: rgba(77, 169, 236, 0.04);
+  border: 1px solid #E8E8E8;
+  border-radius: 2px;
   margin-bottom: 10px;
 }
 .btn-reset {

@@ -25,8 +25,8 @@ const { Header, Sider, Content } = Layout;
 /**
  * @todo:
  * 路由到4.0后，组件对应的路由属性获取方式
- * 
- * FIXME: 
+ *
+ * FIXME:
  *  需求：如果刷新页面之前选中的是二级菜单的话，对应的一级菜单要展开
  *  实现方法：在命名的时候使用 1-1的命名方法，当菜单只有二级的话：默认展开key值为1的就可以
  *  存在问题：当命名方式发生改变或这菜单还有更深的层级时，这种方法会出问题
@@ -119,7 +119,7 @@ export default class LeftNav extends Component {
      * 如果父组件中没有配置路由的话
      * this.props对象中是不会有关于路由的对象的
      * 像this.props.history.push,this.props.match是没有办法使用的
-     * 
+     *
     */
     return (
       <Layout className="leftnav">
@@ -178,7 +178,13 @@ export default class LeftNav extends Component {
               onClick={this.toggle}
             />
             <div className="personal-center">
-              <Button className="ell" icon="github">github</Button>
+              <Button
+                className="ell"
+                icon="github"
+                onClick={() => location.href = "https://github.com/wangkaiwd"}
+              >
+                github
+              </Button>
               <Button className="ell" title="wangkaiwd" icon="user">wangkaiwd</Button>
             </div>
           </Header>
