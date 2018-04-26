@@ -1,5 +1,5 @@
 ## 工作小结
-技术栈：`react`+`antd design`+`webpack`
+技术栈：`react`+`antd design`+`webpack`+`react-dom-router`
 
 ### tab选项卡和左侧导航
 问题：
