@@ -6,5 +6,5 @@ import { ajaxFunc } from 'utils/minix'
 export const fetchRestaurantsList = ajaxFunc('/shopping/restaurants?latitude=31.22967&longitude=121.4762');
 // 获取商铺数量
 export const fetchRestaurantsCount = ajaxFunc('/shopping/restaurants/count');
-// 搜索餐馆
+// 搜索餐馆（搜索内容不进行分页）
 export const fetchRestaurantsSearch = ajaxFunc('/v4/restaurants?geohash=31.22967,121.4762');

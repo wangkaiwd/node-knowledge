@@ -11,8 +11,8 @@ export default class App extends Component {
     super();
   }
   /**
-   * @description 
-   * @todo: 
+   * @description
+   * @todo:
    * 在配置路由的时候碰到一些疑惑，要通过一些demo,
    * 路由的配置方式也应该进行仔细思考
    */

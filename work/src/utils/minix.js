@@ -52,6 +52,10 @@ export const ajaxFunc = (url, type = "get") =>
   * @param {any} [params={}] 请求参数
   * @param {any} success 请求成功时的回调
   * @param {any} fail 请求失败时的回调
+  * FIXME:
+  * 1. 这里的请求方法判断有一些小问题，仅仅针对get方法进行了处理
+  * 由于工作中做多用到的就是get和post方法，所以暂时没有对其它方法进行判断
+  * 2. 如果没有进行传参的话，参数应该默认为{}，则第一个参数就是成功的回调
   */
   (params = {}, success, fail = callback) => {
     let values;

@@ -40,11 +40,7 @@ const columns = [
     ),
   }
 ];
-/**
- * TODO:
- * 1. 数据总条数获取
- * 2. 进行分页和表格列表组件的封装
- */
+
 export default class List extends Component {
   constructor() {
     super();
@@ -107,7 +103,7 @@ export default class List extends Component {
         {...this.state}
         columns={columns}
         scroll={{ y: 400 }}
-        current={this.pageKey.offset / 10 + 1}
+        current={this.pageKey.offset / this.pageKey.limit + 1}
         pageSize={this.pageKey.limit}
         onChange={this.pageChange}
         onShowSizeChange={this.pageSizeChange}

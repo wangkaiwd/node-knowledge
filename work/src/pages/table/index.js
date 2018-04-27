@@ -27,13 +27,20 @@ class MyTable extends Component {
     e.preventDefault();
     const { List } = this.state;
     const searchKey = this.props.form.getFieldsValue();
-    // debugger;
-    // console.log(searchKey);
-    // fetchRestaurantsSearch({ ...searchKey }, (res) => {
-    //   List.setState({});
-    // })
-    // List.getList(searchKey);
-    // List.initPageKey();
+    fetchRestaurantsSearch({ ...searchKey }, (res) => {
+      List.setState({
+        showPagination: false,
+        dataSource: res,
+      });
+    })
+  }
+  // 重置
+  handleReset = () => {
+    const { List } = this.state;
+    this.props.form.resetFields();
+    List.initPageKey();
+    List.getList();
+    List.setState({ showPagination: true });
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -52,7 +59,7 @@ class MyTable extends Component {
               <Col span={12}>
                 <FormItem>
                   <Button type="primary" htmlType="submit" icon="search">搜索</Button>
-                  <Button className="btn-reset">重置</Button>
+                  <Button className="btn-reset" onClick={this.handleReset}>重置</Button>
                 </FormItem>
               </Col>
             </Row>

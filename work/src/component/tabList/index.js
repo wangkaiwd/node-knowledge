@@ -14,6 +14,7 @@ export default class TabList extends Component {
       current,
       onChange,
       onShowSizeChange,
+      showPagination = true,
       ...tableProps,
     } = this.props;
     return (
@@ -24,16 +25,19 @@ export default class TabList extends Component {
           bordered={bordered || true}
           pagination={false}
         />
-        <Pagination
-          total={total}
-          showTotal={total => `共 ${total} 条`}
-          current={current}
-          pageSize={pageSize}
-          onChange={onChange}
-          onShowSizeChange={onShowSizeChange}
-          showSizeChanger={true}
-          defaultCurrent={1}
-        />
+        {
+          showPagination &&
+          <Pagination
+            total={total}
+            showTotal={total => `共 ${total} 条`}
+            current={current}
+            pageSize={pageSize}
+            onChange={onChange}
+            onShowSizeChange={onShowSizeChange}
+            showSizeChanger={true}
+            defaultCurrent={1}
+          />
+        }
       </div>
     )
   }
