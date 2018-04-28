@@ -1,3 +1,11 @@
+/*
+ * @Author: wangkai
+ * @Date: 2018-04-28 20:58:43
+ * @Last Modified by: wangkai
+ * @Last Modified time: 2018-04-28 21:14:44
+ * @Desc: 餐馆列表页面
+ */
+
 import React, { Component } from 'react';
 import {
   Table,
@@ -8,6 +16,7 @@ import {
   Row,
   Col,
   Button,
+  message
 } from 'antd';
 
 import List from './List';
@@ -27,6 +36,7 @@ class MyTable extends Component {
     e.preventDefault();
     const { List } = this.state;
     const searchKey = this.props.form.getFieldsValue();
+    if (!searchKey.keyword) return message.warning('搜索内容不能为空!');
     fetchRestaurantsSearch({ ...searchKey }, (res) => {
       List.setState({
         showPagination: false,
