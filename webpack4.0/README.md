@@ -14,7 +14,7 @@ module.exports = {
   entry: '',  // 入口文件
   output: {}, // 出口文件
   module: {}, // 处理对应模块
-  plugins: {}, // 对应的插件
+  plugins: [], // 对应的插件
   devServer: {}, // 开发服务器配置
 }
 ```
@@ -40,3 +40,13 @@ module.exports = {
 多入口文件配置
 ![多入口](../images/manyentry.png)
 ![打包文件](../images/build.png)
+
+### 配置html模板
+生成带`hash`串的`bundle.js`
+![html-template](../images/hash.png)
+
+`html`中自动引入打包后的js文件
+![html-template](../images/src.png)
+
+多页面开发如何配置多页面
+![html-template-many](../images/manyhtml.png)
