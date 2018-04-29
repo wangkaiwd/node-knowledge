@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Form, Icon, Input, Button, Checkbox } from 'antd'
+import { Card, Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd'
 const FormItem = Form.Item;
 import "./index.less"
 
@@ -7,12 +7,32 @@ class Login extends Component {
   constructor() {
     super()
     this.state = {
-
+      // 能否获取验证码
+      isGetCode: true,
+      // 倒计时
+      countdown: 10,
     }
   }
   // 提交登录信息
   handleSubmit = () => {
     this.props.history.push(`/index`);
+  }
+  // 获取验证码
+  getCode = () => {
+    this.setState({ isGetCode: false });
+    this.timeDown();
+  }
+  timeDown = () => {
+    let { countdown } = this.state;
+    clearInterval(this.timer);
+    this.timer = setInterval(() => {
+      if (countdown <= 0) {
+        this.setState({ countdown: 10, isGetCode: true });
+        return clearInterval(this.timer);
+      }
+      countdown--;
+      this.setState({ countdown });
+    }, 1000)
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -31,21 +51,41 @@ class Login extends Component {
             hoverable
           >
             <Form onSubmit={this.handleSubmit}>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <FormItem>
+                    {getFieldDecorator('username', {
+                      rules: [{ required: true, message: 'Please input your username!' }],
+                    })(
+                      <Input
+                        prefix={
+                          <Icon
+                            type="user"
+                            style={{ color: 'rgba(0,0,0,.25)' }}
+                          />}
+                        placeholder="usename" />
+                    )}
+                  </FormItem>
+                </Col>
+                <Col span={12}>
+                  <FormItem>
+                    {getFieldDecorator('password', {
+                      rules: [{ required: true, message: 'Please input your Password!' }],
+                    })(
+                      <Input
+                        prefix={
+                          <Icon
+                            type="lock"
+                            style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        type="password"
+                        placeholder="password"
+                      />
+                    )}
+                  </FormItem>
+                </Col>
+              </Row>
               <FormItem>
-                {getFieldDecorator('userName', {
-                  rules: [{ required: true, message: 'Please input your username!' }],
-                })(
-                  <Input
-                    prefix={
-                      <Icon
-                        type="user"
-                        style={{ color: 'rgba(0,0,0,.25)' }}
-                      />}
-                    placeholder="Username" />
-                )}
-              </FormItem>
-              <FormItem>
-                {getFieldDecorator('password', {
+                {getFieldDecorator('captcha_code ', {
                   rules: [{ required: true, message: 'Please input your Password!' }],
                 })(
                   <Input
@@ -54,9 +94,36 @@ class Login extends Component {
                         type="lock"
                         style={{ color: 'rgba(0,0,0,.25)' }} />}
                     type="password"
-                    placeholder="Password"
+                    placeholder="verification code"
                   />
                 )}
+              </FormItem>
+              <FormItem>
+                <Row gutter={16}>
+                  <Col span={8}>
+                    {this.state.isGetCode
+                      ?
+                      <Button type="primary" onClick={this.getCode}>获取验证码</Button>
+                      :
+                      <Button type="primary" disabled>
+                        <span>{this.state.countdown}</span>
+                        后继续获取
+                      </Button>
+                    }
+                  </Col>
+                  <Col span={16}>
+                    {getFieldDecorator('code')(
+                      <Input
+                        prefix={
+                          <Icon
+                            type="lock"
+                            style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        type="password"
+                        disabled
+                      />
+                    )}
+                  </Col>
+                </Row>
               </FormItem>
               <FormItem>
                 {getFieldDecorator('remember', {
