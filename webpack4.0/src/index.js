@@ -1,7 +1,4 @@
-const arr = [1, 2, 3, 4];
+import './index.css';
+import './text.less'
 
-const arr2 = arr.reduce((x, y) => {
-  return x + y;
-})
-
-console.log(arr2);
+console.log('hello');
