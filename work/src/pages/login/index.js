@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd'
+import { fetchLoginGetcode } from 'src/http/api'
 const FormItem = Form.Item;
 import "./index.less"
 
@@ -11,6 +12,8 @@ class Login extends Component {
       isGetCode: true,
       // 倒计时
       countdown: 10,
+      // 验证码
+      codeImg: '',
     }
   }
   // 提交登录信息
@@ -20,6 +23,7 @@ class Login extends Component {
   // 获取验证码
   getCode = () => {
     this.setState({ isGetCode: false });
+    fetchLoginGetcode({}, (res) => this.setState({ codeImg: res.code }));
     this.timeDown();
   }
   timeDown = () => {
@@ -40,10 +44,11 @@ class Login extends Component {
       <div className="login f-c">
         <div className="login-card">
           <Card
+            // title="Login System"
             cover={
               <img
                 alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                src={this.state.codeImg || "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"}
               />
             }
             bordered={true}
@@ -111,7 +116,7 @@ class Login extends Component {
                       </Button>
                     }
                   </Col>
-                  <Col span={16}>
+                  {/* <Col span={16}>
                     {getFieldDecorator('code')(
                       <Input
                         prefix={
@@ -122,7 +127,7 @@ class Login extends Component {
                         disabled
                       />
                     )}
-                  </Col>
+                  </Col> */}
                 </Row>
               </FormItem>
               <FormItem>
