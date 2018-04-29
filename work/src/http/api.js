@@ -1,6 +1,11 @@
-import { ajaxFunc } from 'utils/minix'
-
-// 项目的接口地址
+/*
+ * @Author: wangkai
+ * @Date: 2018-04-28 23:58:50
+ * @Last Modified by:   wangkai
+ * @Last Modified time: 2018-04-28 23:58:50
+ * @Desc: 项目请求接口
+ */
+import { ajaxFunc } from './ajax';
 
 // 获取商铺列表
 export const fetchRestaurantsList = ajaxFunc('/shopping/restaurants?latitude=31.22967&longitude=121.4762');

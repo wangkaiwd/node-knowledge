@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 22:01:14
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-04-28 23:40:48
+ * @Last Modified time: 2018-04-29 00:05:22
  * @Desc: webpack从零配置
  */
 const path = require('path');
@@ -16,6 +16,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
  * input: E:\data\businessLogic\webpack4.0\dist
  */
 // console.log('resolve', path.resolve('dist'));
+
+// TODO:多入口文件的第一种方式没有实现
 module.exports = {
   // entry: './src/index.js',  // 入口文件
   /**
