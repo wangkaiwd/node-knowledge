@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 22:01:14
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-04-29 22:26:22
+ * @Last Modified time: 2018-04-30 22:11:33
  * @Desc: webpack从零配置
  */
 const path = require('path');
@@ -21,7 +21,6 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
  * TODO:
  * 1. 多入口文件第一种配置方式
  * 2. 拆分多个css文件
- * 配置完了postcss
  */
 module.exports = {
   entry: './src/index.js',  // 入口文件
@@ -68,8 +67,6 @@ module.exports = {
 
     // 拆分后会将css文件放到dist目录下的css/style.css
     new ExtractTextWebpackPlugin('css/style.css'),
-    // 引用该插件即可为
-    require('autoprefixer'),
   ],
   module: {
     rules: [
