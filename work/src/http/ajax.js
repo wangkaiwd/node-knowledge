@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 23:57:48
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-04-29 22:58:55
+ * @Last Modified time: 2018-04-30 18:50:59
  * @Desc: axios进行封装
  */
 
@@ -11,16 +11,27 @@ import axios from 'axios';
 import { message } from 'antd'
 import httpConfig from 'src/http/httpConfig'
 import NProgress from 'nprogress'
+import qs from 'qs'
+
 // 创建axios的实例
 export const $axios = axios.create({
   baseURL: `${httpConfig.HTTP_DOMAIN}:${httpConfig.HTTP_PORT}`,
   timeout: 1000,
+  // headers: { 'Content-Type': 'application/json' }
 });
+
 
 // 通过拦截器统一处理每一次的响应和请求
 $axios.interceptors.request.use((config) => {
   // 请求时的一些配置信息
   // console.log(config);
+  // 设置post请求方式的请求头，如果不设置请求头的话，
+  // post方式请求会多通过option进行一些请求
+  if (config.method.toLowerCase() === 'post') {
+    config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    // 将post请求的数据处理成query参数：即key1=value1&key2=value2的格式
+    config.data = qs.stringify(config.data);
+  }
   NProgress.start();
   return config;
 }, (err) => {

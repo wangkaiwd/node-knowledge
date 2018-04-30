@@ -2,10 +2,39 @@
  * @Author: wangkai
  * @Date: 2018-04-28 23:59:48
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-04-29 00:00:33
+ * @Last Modified time: 2018-04-30 16:52:15
  * @Desc: 项目公共方法封装
  */
 
-export const getItem = (val) => {
-  return JSON.parse(sessionStorage.getItem(val));
+
+
+/**
+ * @description 获取浏览器本地存储
+ * @param {any} val 获取的内容
+ * @param {any} storage 存储方式
+ * @returns 浏览器存储中的内容
+ */
+const getItem = (val, storage) => {
+  return JSON.parse(storage.getItem(val));
+}
+
+/**
+ * @description 将内容存储到浏览器本地存储
+ * @param {string} val 存储内容的键值
+ * @param {any} content 存储内容的属性值
+ * @param {any} storage 存储类型
+ * @param {boolean} cover 是否覆盖原有内容（true:覆盖（默认值），false:不覆盖）
+ */
+const setItem = (val, content, storage, cover = true) => {
+  if (cover) {
+    const params = JSON.stringify(content);
+    storage.setItem(val, params);
+    return
+  }
+  const info = getItem(val, storage);
+  if (Object.toString.call(info) === "[Object Array]") {
+    info.push(content)
+    const params = JSON.stringify(info);
+    storage.setItem(val, params);
+  }
 }

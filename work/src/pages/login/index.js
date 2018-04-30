@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Card, Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd'
-import { fetchLoginGetcode } from 'src/http/api'
+import { Card, Form, Icon, Input, Button, Checkbox, Row, Col, message } from 'antd'
+import { fetchLoginGetcode, fetchLogin } from 'src/http/api'
 const FormItem = Form.Item;
 import "./index.less"
 
@@ -14,11 +14,26 @@ class Login extends Component {
       countdown: 10,
       // 验证码
       codeImg: '',
+      // 登录loading
+      loginLoading: false,
     }
   }
   // 提交登录信息
-  handleSubmit = () => {
-    this.props.history.push(`/index`);
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      const { remember, ...params } = values;
+      this.setState({ loginLoading: true });
+      fetchLogin(params, (res) => {
+        // message.warning(res.message);
+        this.setState({ loginLoading: false })
+        message.success('登录成功');
+        this.props.history.push(`/index`);
+      })
+    })
   }
   // 获取验证码
   getCode = () => {
@@ -56,42 +71,23 @@ class Login extends Component {
             hoverable
           >
             <Form onSubmit={this.handleSubmit}>
-              <Row gutter={16}>
-                <Col span={12}>
-                  <FormItem>
-                    {getFieldDecorator('username', {
-                      rules: [{ required: true, message: 'Please input your username!' }],
-                    })(
-                      <Input
-                        prefix={
-                          <Icon
-                            type="user"
-                            style={{ color: 'rgba(0,0,0,.25)' }}
-                          />}
-                        placeholder="usename" />
-                    )}
-                  </FormItem>
-                </Col>
-                <Col span={12}>
-                  <FormItem>
-                    {getFieldDecorator('password', {
-                      rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                      <Input
-                        prefix={
-                          <Icon
-                            type="lock"
-                            style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type="password"
-                        placeholder="password"
-                      />
-                    )}
-                  </FormItem>
-                </Col>
-              </Row>
-              <FormItem>
-                {getFieldDecorator('captcha_code ', {
-                  rules: [{ required: true, message: 'Please input your Password!' }],
+              <FormItem hasFeedback>
+                {getFieldDecorator('username', {
+                  rules: [{ required: true, message: 'Please input your username!' }],
+                })(
+                  <Input
+                    prefix={
+                      <Icon
+                        type="user"
+                        style={{ color: 'rgba(0,0,0,.25)' }}
+                      />}
+                    placeholder="usename"
+                  />
+                )}
+              </FormItem>
+              <FormItem hasFeedback>
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: 'Please input your password!' }],
                 })(
                   <Input
                     prefix={
@@ -99,36 +95,33 @@ class Login extends Component {
                         type="lock"
                         style={{ color: 'rgba(0,0,0,.25)' }} />}
                     type="password"
+                    placeholder="password"
+                  />
+                )}
+              </FormItem>
+              <FormItem hasFeedback>
+                {getFieldDecorator('captcha_code', {
+                  // rules: [{ required: true, message: 'Please input verification code!' }],
+                })(
+                  <Input
+                    prefix={
+                      <Icon
+                        type="key"
+                        style={{ color: 'rgba(0,0,0,.25)' }} />}
                     placeholder="verification code"
                   />
                 )}
               </FormItem>
               <FormItem>
-                <Row gutter={16}>
-                  <Col span={8}>
-                    {this.state.isGetCode
-                      ?
-                      <Button type="primary" onClick={this.getCode}>获取验证码</Button>
-                      :
-                      <Button type="primary" disabled>
-                        <span>{this.state.countdown}</span>
-                        后继续获取
-                      </Button>
-                    }
-                  </Col>
-                  {/* <Col span={16}>
-                    {getFieldDecorator('code')(
-                      <Input
-                        prefix={
-                          <Icon
-                            type="lock"
-                            style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type="password"
-                        disabled
-                      />
-                    )}
-                  </Col> */}
-                </Row>
+                {this.state.isGetCode
+                  ?
+                  <Button type="primary" onClick={this.getCode}>获取验证码</Button>
+                  :
+                  <Button type="primary" disabled>
+                    <span>{this.state.countdown}</span>
+                    后继续获取
+                  </Button>
+                }
               </FormItem>
               <FormItem>
                 {getFieldDecorator('remember', {
@@ -137,8 +130,13 @@ class Login extends Component {
                 })(
                   <Checkbox>Remember me</Checkbox>
                 )}
-                <Button type="primary" htmlType="submit" className="login-form-button">
-                  Log in
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                  loading={this.state.loginLoading}
+                >
+                  Login
                 </Button>
               </FormItem>
             </Form>

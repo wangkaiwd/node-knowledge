@@ -50,3 +50,7 @@ const res = {
   request: {}
 }
 ```
+
+`post`请求需要注意的地方
+1. 设置请求头： `Content-Type = 'application/x-www-form-urlencoded'`
+2. 将请求参数处理为`query`格式
