@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 23:57:48
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-04-30 18:50:59
+ * @Last Modified time: 2018-05-02 18:07:43
  * @Desc: axios进行封装
  */
 
@@ -32,6 +32,8 @@ $axios.interceptors.request.use((config) => {
     // 将post请求的数据处理成query参数：即key1=value1&key2=value2的格式
     config.data = qs.stringify(config.data);
   }
+  // 进行跨域请求时携带cookie,否则无法获取到用户信息
+  config.withCredentials = true;
   NProgress.start();
   return config;
 }, (err) => {
@@ -42,6 +44,10 @@ $axios.interceptors.request.use((config) => {
 $axios.interceptors.response.use((res) => {
   if (res.status !== 200) {
     message.error(res.data.msg);
+    return Promise.reject(res);
+  }
+  if (res.data.status === 0) {
+    message.warning(res.data.message)
     return Promise.reject(res);
   }
   NProgress.done();

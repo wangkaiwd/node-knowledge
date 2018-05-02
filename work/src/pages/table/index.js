@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 20:58:43
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-04-28 21:14:44
+ * @Last Modified time: 2018-05-02 21:54:11
  * @Desc: 餐馆列表页面
  */
 
@@ -20,6 +20,7 @@ import {
 } from 'antd';
 
 import List from './List';
+import UpdateModal from './component/updateModal';
 import { fetchRestaurantsSearch } from '../../http/api';
 
 const FormItem = Form.Item;
@@ -28,7 +29,9 @@ class MyTable extends Component {
   constructor() {
     super();
     this.state = {
-      List: {}
+      List: {},
+      Modal: {},
+      itemValue: {},
     }
   }
   // 查询
@@ -52,8 +55,15 @@ class MyTable extends Component {
     List.getList();
     List.setState({ showPagination: true });
   }
+  // 修改
+  handleEdit = (record) => {
+    const { Modal } = this.state;
+    // console.log('modal', record);
+    Modal.setState({ visible: true, itemValue: record });
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { Modal } = this.state;
     return (
       <div className="mytab">
         <div className="search-header">
@@ -78,8 +88,13 @@ class MyTable extends Component {
         <div className="tablelist">
           <List
             onRef={(List) => this.setState({ List })}
+            handleEdit={this.handleEdit}
           />
         </div>
+        {/* 并不用让内容在点击编辑时显示，因为变量本来就是在编辑时赋值的 */}
+        <UpdateModal
+          onRef={(Modal) => this.setState({ Modal })}
+        />
       </div>
     )
   }

@@ -2,14 +2,18 @@
  * @Author: wangkai
  * @Date: 2018-04-28 22:01:14
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-04-30 22:11:33
+ * @Last Modified time: 2018-05-02 17:10:14
  * @Desc: webpack从零配置
  */
 const path = require('path');
 
+const webpack = require('webpack');
+
 // 插件都是一个类，命名时尽量用大写开头
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+// 每次打包之前将dist目录下的文件都清空，然后把打好包的文件都放进去
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 /**
  * path.resolve把一个路径或者路径片段的序列解析为一个绝对路径
  *
@@ -37,9 +41,9 @@ module.exports = {
   output: {
     // filename: 'bundle.js', // 打包的文件名称
     // 添加文件可以防止文件缓存，每次都会生成四位的hash串
-    filename: 'bundle.[hash:4].js',
+    // filename: 'bundle.[hash:4].js',
     // 多入口文件：[name]就可以将入口文件名和出口文件名一一对应
-    // filename: '[name].js', // 打包后会生成 'index.js'和'login.js'
+    filename: '[name].[hash:4].js', // 打包后会生成 'index.js'和'login.js'
     path: path.resolve('dist'), // 打包后的目录，必须是绝对路径
   },
   plugins: [
@@ -49,7 +53,7 @@ module.exports = {
        * 用哪个html作为模板
        * 在scr目录下创建index.html当做模板来用
        */
-      template: './src/index.html',
+      template: './index.html',
       hash: true, // 会在打包好的bundle.js后面加上hash串
     }),
 
@@ -63,11 +67,36 @@ module.exports = {
     //   template: './src/login.html',
     //   filename: 'login.html',
     //   chunks: ['login']  // 设置对应关系，login.html对应的时login.js
-    // })
+    // }),
 
     // 拆分后会将css文件放到dist目录下的css/style.css
     new ExtractTextWebpackPlugin('css/style.css'),
+
+    // 打包前先清空前一次打包好的文件
+    new CleanWebpackPlugin('dist'),
+
+    // webpack自带插件进行热替换，热替换不是刷新
+    new webpack.HotModuleReplacementPlugin(),
   ],
+  // 将第三方插件和自己写的js进行一个分离
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: { // 抽离第三方插件
+          test: /node_modules/, // 指定node_modules下的第三方包
+          chunks: 'initial',
+          name: 'vendor', // 打包后的文件名，任意命名
+          // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
+          priority: 10,
+        },
+        utils: { // 抽离自己写的公共代码，utils这个名字可以随意起
+          chunks: 'initial',
+          name: 'utils', // 任意名
+          minSize: 0, // 只要超出0字节就生成一个新包
+        }
+      }
+    }
+  },
   module: {
     rules: [
       // {
@@ -128,7 +157,43 @@ module.exports = {
         test: /\.(eot|ttf|woff|svg)$/,
         use: 'file-loader'
       },
+      {
+        test: /.js$/,
+        use: 'babel-loader',
+        include: /src/,  // 只转换src目录下的js
+        exclude: /node_modules/, // 排除掉node_modules,优化打包速度
+      }
     ]
+  },
+  // 通过devServer打包的文件存在于内存中，并不会产生在dist目录下
+  devServer: {
+    contentBase: './dist',
+    host: 'localhost', // 默认时localhost
+    port: 3000, // 端口
+    open: true, // 自动打开浏览器
+    hot: true,  // 开启热更新
+  },
+  /**
+   * 热更新：
+   * 1. devServer： hot:true,
+   * 2. wedpack自带插件
+   * 3. 在主要js文件里检查是否有module.hot
+   * if(module.hot) {
+   *  // 实现热更新
+   *  module.hot.accept();
+   * }
+   */
+
+  // resolve解析：1. 配置别名，2. 省略后缀
+  resolve: {
+    // 1. 配置别名，方便路径引入
+    alias: {
+      // src: "./src/", // 相对路径配置
+      src: path.resolve('src'), // 绝对路径配置
+      // component: path.resolve('src/component'),
+    },
+    // 省略后缀
+    extensions: ['.js', '.json', '.css', '.less'],
   },
   mode: 'development', // 模式配置
 }

@@ -10,4 +10,10 @@ message.config({
   duration: 3,
 });
 
-render(<Router><App /></Router>, document.getElementById('box'));
+const hotRender = (Component) => {
+  render(
+    <Router><Component /></Router>,
+    document.getElementById('box')
+  );
+}
+hotRender(App);

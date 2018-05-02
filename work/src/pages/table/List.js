@@ -5,41 +5,43 @@ import {
   fetchRestaurantsCount
 } from "src/http/api"
 import { Divider, Icon } from 'antd'
-const columns = [
-  {
-    title: '店铺名称',
-    dataIndex: 'name',
-    key: 'name',
-    width: '18%',
-  },
-  {
-    title: '店铺地址',
-    dataIndex: 'address',
-    key: 'address',
-    width: '35%',
-  },
-  {
-    title: '店铺介绍',
-    dataIndex: 'description',
-    key: 'description',
-    width: '18%'
-  },
-  {
-    title: '操作',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a href="javascript:;">编辑</a>
-        <Divider type="vertical" />
-        <a href="javascript:;">添加食品</a>
-        <Divider type="vertical" />
-        <a href="javascript:;">
-          删除
+const columns = function () {
+  return [
+    {
+      title: '店铺名称',
+      dataIndex: 'name',
+      key: 'name',
+      width: '18%',
+    },
+    {
+      title: '店铺地址',
+      dataIndex: 'address',
+      key: 'address',
+      width: '35%',
+    },
+    {
+      title: '店铺介绍',
+      dataIndex: 'description',
+      key: 'description',
+      width: '18%'
+    },
+    {
+      title: '操作',
+      key: 'action',
+      render: (text, record) => (
+        <span>
+          <a href="javascript:;" onClick={() => this.props.handleEdit(record)}>编辑</a>
+          <Divider type="vertical" />
+          <a href="javascript:;">添加食品</a>
+          <Divider type="vertical" />
+          <a href="javascript:;">
+            删除
         </a>
-      </span>
-    ),
-  }
-];
+        </span>
+      ),
+    }
+  ];
+}
 
 export default class List extends Component {
   constructor() {
@@ -54,6 +56,8 @@ export default class List extends Component {
       offset: 0,
       limit: 10,
     }
+    // 表格配置项
+    this.columns = columns.bind(this);
   }
   initPageKey = () => {
     this.pageKey = {
@@ -101,7 +105,7 @@ export default class List extends Component {
     return (
       <TabList
         {...this.state}
-        columns={columns}
+        columns={this.columns()}
         scroll={{ y: 400 }}
         current={this.pageKey.offset / this.pageKey.limit + 1}
         pageSize={this.pageKey.limit}

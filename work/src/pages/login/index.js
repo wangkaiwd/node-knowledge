@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Form, Icon, Input, Button, Checkbox, Row, Col, message } from 'antd'
-import { fetchLoginGetcode, fetchLogin } from 'src/http/api'
+import { fetchLoginGetcode, fetchLogin, fetchLoginAdmin, fetchLoginAdminInfo } from 'src/http/api'
+import { setItem } from 'src/utils/minix'
 const FormItem = Form.Item;
 import "./index.less"
 
@@ -25,13 +26,17 @@ class Login extends Component {
       if (err) {
         return
       }
-      const { remember, ...params } = values;
+      const { remember, captcha_code, ...params } = values;
       this.setState({ loginLoading: true });
-      fetchLogin(params, (res) => {
-        // message.warning(res.message);
+      fetchLoginAdmin(params, (res) => {
+        message.warning(res.success);
         this.setState({ loginLoading: false })
-        message.success('登录成功');
         this.props.history.push(`/index`);
+        fetchLoginAdminInfo({}, res => {
+          console.log(res);
+        })
+      }, err => {
+        this.setState({ loginLoading: false })
       })
     })
   }
@@ -72,7 +77,7 @@ class Login extends Component {
           >
             <Form onSubmit={this.handleSubmit}>
               <FormItem hasFeedback>
-                {getFieldDecorator('username', {
+                {getFieldDecorator('user_name', {
                   rules: [{ required: true, message: 'Please input your username!' }],
                 })(
                   <Input
@@ -101,7 +106,7 @@ class Login extends Component {
               </FormItem>
               <FormItem hasFeedback>
                 {getFieldDecorator('captcha_code', {
-                  // rules: [{ required: true, message: 'Please input verification code!' }],
+                  rules: [{ required: true, message: 'Please input verification code!' }],
                 })(
                   <Input
                     prefix={

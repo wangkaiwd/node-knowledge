@@ -51,6 +51,10 @@ const res = {
 }
 ```
 
-`post`请求需要注意的地方
+`post`请求需要注意的地方：
 1. 设置请求头： `Content-Type = 'application/x-www-form-urlencoded'`
+   **如果不设置的话会多发一次`OPTION`请求**
 2. 将请求参数处理为`query`格式
+   query格式：如
+
+`cors`跨域问题：
