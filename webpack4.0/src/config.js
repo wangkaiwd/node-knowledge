@@ -9,7 +9,7 @@ export const leftNavConfig = [
   {
     key: '1',
     icon: 'switcher',
-    content: '列表管理',
+    content: 'tab切换',
     href: '/tab',
     component: Home
   },

@@ -4,7 +4,6 @@ import {
   fetchRestaurantsList,
   fetchRestaurantsCount
 } from "src/http/api"
-import * as pagin from 'src/pages/tools/pagin';
 import { Divider, Icon } from 'antd'
 const columns = function () {
   return [
@@ -53,11 +52,18 @@ export default class List extends Component {
       total: 0,
     }
     // 分页
-    this.pageKey = { ...pagin.pageKey };
+    this.pageKey = {
+      offset: 0,
+      limit: 10,
+    }
     // 表格配置项
     this.columns = columns.bind(this);
-    this.pageChange = pagin.pageChange.bind(this);
-    this.pageSizeChange = pagin.pageSizeChange.bind(this);
+  }
+  initPageKey = () => {
+    this.pageKey = {
+      offset: 0,
+      limit: 10,
+    }
   }
   componentWillMount = () => {
     this.props.onRef(this);
@@ -83,6 +89,17 @@ export default class List extends Component {
   // 获取餐馆数量
   getCount = () => {
     fetchRestaurantsCount({}, (res) => this.setState({ total: res.count }));
+  }
+  // 改变页数
+  pageChange = (page) => {
+    this.pageKey.offset = (page - 1) * this.pageKey.limit;
+    this.getList();
+  }
+  // 改变每页条数
+  pageSizeChange = (current, pageSize) => {
+    this.pageKey.offset = 0;
+    this.pageKey.limit = pageSize;
+    this.getList();
   }
   render() {
     return (

@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
 import { Card, Form, Icon, Input, Button, Checkbox, Row, Col, message } from 'antd'
 import { fetchLoginGetcode, fetchLogin, fetchLoginAdmin, fetchLoginAdminInfo } from 'src/http/api'
-import { setItem, getItem } from 'src/utils/minix'
+import { setItem } from 'src/utils/minix'
 const FormItem = Form.Item;
 import "./index.less"
-import { userInfo } from 'os';
-/**
- * TODO:
- * 1. 记住用户名
- * 2. 存储用户信息
- * 3. 用户列表和管理员列表
- */
+
 class Login extends Component {
   constructor() {
     super()
@@ -23,24 +17,6 @@ class Login extends Component {
       codeImg: '',
       // 登录loading
       loginLoading: false,
-      // 验证码loading
-      codeLoading: false,
-      // 是否记住密码
-      isChecked: false,
-    }
-  }
-  componentDidMount = () => {
-    this.setUserInfo();
-  }
-  // 写入用户名
-  setUserInfo = () => {
-    const userInfo = getItem('userInfo') || {};
-    const isChecked = getItem('isChecked') || false;
-    this.setState({ isChecked });
-    if (isChecked) {
-      this.props.form.setFieldsValue({
-        user_name: userInfo.user_name,
-      });
     }
   }
   // 提交登录信息
@@ -57,9 +33,7 @@ class Login extends Component {
         this.setState({ loginLoading: false })
         this.props.history.push(`/index`);
         fetchLoginAdminInfo({}, res => {
-          // console.log(res);
-          setItem('userInfo', res.data)
-          setItem('isChecked', this.state.isChecked);
+          console.log(res);
         })
       }, err => {
         this.setState({ loginLoading: false })
@@ -72,7 +46,6 @@ class Login extends Component {
     fetchLoginGetcode({}, (res) => this.setState({ codeImg: res.code }));
     this.timeDown();
   }
-  // 倒计时
   timeDown = () => {
     let { countdown } = this.state;
     clearInterval(this.timer);
@@ -84,10 +57,6 @@ class Login extends Component {
       countdown--;
       this.setState({ countdown });
     }, 1000)
-  }
-  // 记忆密码
-  handleRemember = () => {
-
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -162,9 +131,9 @@ class Login extends Component {
               <FormItem>
                 {getFieldDecorator('remember', {
                   valuePropName: 'checked',
-                  initialValue: this.state.isChecked,
+                  initialValue: true,
                 })(
-                  <Checkbox onChange={this.handleRemember}>Remember me</Checkbox>
+                  <Checkbox>Remember me</Checkbox>
                 )}
                 <Button
                   type="primary"

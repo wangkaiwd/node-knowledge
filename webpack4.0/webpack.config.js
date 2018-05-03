@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 22:01:14
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-02 17:10:14
+ * @Last Modified time: 2018-05-03 10:10:43
  * @Desc: webpack从零配置
  */
 const path = require('path');
@@ -99,41 +99,41 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.css$/, // 解析css
-      //   // use: ['style-loader', 'css-loader'],
-      //   use: ExtractTextWebpackPlugin.extract({
-      //     // 将css用link方式引入就不再需要style-loader
-      //     use: 'css-loader',
-      //     publicPath: '../'
-      //   })
-      //   /**
-      //    * 也可以这样写，方便写配置参数
-      //    * use:[
-      //    *    {loader:'style-loader'},
-      //    *    {loader: 'css-loader'},
-      //    * ]
-      //    */
-      // },
-      // {
-      //   test: /\.less$/, // 解析less
-      //   // use: [
-      //   //   { loader: 'style-loader' },
-      //   //   { loader: 'css-loader' },
-      //   //   { loader: 'less-loader' }
-      //   // ],
-      //   use: ExtractTextWebpackPlugin.extract({
-      //     use: ['css-loader', 'less-loader'],
-      //   })
-      // },
       {
-        test: /\.(less|css)$/, // 解析less和css
-        use: ExtractTextWebpackPlugin.extract({
-          // 配置postcss-loader
-          use: ['css-loader', 'less-loader', 'postcss-loader'],
-          publicPath: '../' // 背景图片的相对路径
-        })
+        test: /\.css$/, // 解析css
+        use: ['style-loader', 'css-loader'],
+        // use: ExtractTextWebpackPlugin.extract({
+        //   // 将css用link方式引入就不再需要style-loader
+        //   use: ['style-loader', 'css-loader'],
+        //   publicPath: '../',
+        // }),
+        /**
+         * 也可以这样写，方便写配置参数
+         * use:[
+         *    {loader:'style-loader'},
+         *    {loader: 'css-loader'},
+         * ]
+         */
       },
+      {
+        test: /\.less$/, // 解析less
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'less-loader' }
+        ],
+        // use: ExtractTextWebpackPlugin.extract({
+        //   use: ['css-loader', 'less-loader'],
+        // }),
+      },
+      // {
+      //   test: /\.(less|css)$/, // 解析less和css
+      //   use: ExtractTextWebpackPlugin.extract({
+      //     // 配置postcss-loader
+      //     use: ['css-loader', 'less-loader', 'postcss-loader'],
+      //     publicPath: '../' // 背景图片的相对路径
+      //   })
+      // },
       // 背景图片引用
       {
         test: /\.(jpe?g|png|gif)$/,
@@ -189,8 +189,12 @@ module.exports = {
     // 1. 配置别名，方便路径引入
     alias: {
       // src: "./src/", // 相对路径配置
-      src: path.resolve('src'), // 绝对路径配置
-      // component: path.resolve('src/component'),
+      // src: path.resolve('src'), // 绝对路径配置
+      component: path.resolve(__dirname, 'src/component'),
+      style: path.resolve(__dirname, 'src/style'),
+      src: path.resolve(__dirname, 'src'),
+      utils: path.resolve(__dirname, 'src/utils'),
+      assets: path.resolve(__dirname, 'assets'),
     },
     // 省略后缀
     extensions: ['.js', '.json', '.css', '.less'],

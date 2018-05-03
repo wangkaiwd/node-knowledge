@@ -53,15 +53,14 @@ export default class LeftNav extends Component {
   // 设置默认激活id
   setDefault = () => {
     const { pathname } = this.props.location;
-    const { path } = this.props.match;
     // 寻找相同路径
     const findPath = (arrTree) => {
-      // debugger
       arrTree.map(item => {
         if (item.child) {
+          // console.log('item', item);
           return findPath(item.child)
         }
-        if (`${path}${item.href}` === pathname) {
+        if (item.href === pathname) {
           this.setState({
             defaultSelectedKeys: [item.key],
             defaultOpenKeys: [item.key.charAt(0)],
@@ -129,6 +128,18 @@ export default class LeftNav extends Component {
           collapsible
           collapsed={this.state.collapsed}
         >
+          {/* <div className="admin">
+            <div className="logo" >
+              <img src="assets/logo.jpg" alt="" />
+            </div>
+            {
+              this.state.collapsed ||
+              <div className="text f-c">
+                react & antd
+                            </div>
+            }
+
+          </div> */}
           <div className="logo">
             <Card
             >

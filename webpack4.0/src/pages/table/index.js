@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 20:58:43
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-03 14:05:34
+ * @Last Modified time: 2018-05-02 21:54:11
  * @Desc: 餐馆列表页面
  */
 
@@ -22,7 +22,7 @@ import {
 import List from './List';
 import UpdateModal from './component/updateModal';
 import { fetchRestaurantsSearch } from '../../http/api';
-import * as pagin from 'src/pages/tools/pagin';
+
 const FormItem = Form.Item;
 
 class MyTable extends Component {
@@ -51,7 +51,7 @@ class MyTable extends Component {
   handleReset = () => {
     const { List } = this.state;
     this.props.form.resetFields();
-    List.pageKey = { ...pagin.pageKey }
+    List.initPageKey();
     List.getList();
     List.setState({ showPagination: true });
   }
@@ -65,7 +65,7 @@ class MyTable extends Component {
     const { getFieldDecorator } = this.props.form;
     const { Modal } = this.state;
     return (
-      <div className="page-content">
+      <div className="mytab">
         <div className="search-header">
           <Form onSubmit={this.handleSubmit}>
             <Row>
