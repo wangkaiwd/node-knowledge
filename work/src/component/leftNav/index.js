@@ -5,9 +5,11 @@ import {
   Layout,
   Card,
   Avatar,
+  Popover,
 } from 'antd';
 import React, { Component } from 'react';
 import { leftNavConfig } from 'src/config';
+import * as minix from "src/utils/minix";
 import {
   HashRouter as Router,
   Switch,
@@ -38,11 +40,20 @@ export default class LeftNav extends Component {
       collapsed: false,
       defaultSelectedKeys: ['1'],
       defaultOpenKeys: [],
+      userInfo: minix.getItem('userInfo') || {},
     };
   }
   componentWillMount = () => {
-    // console.log('this', this);
+    this.loginMonitor();
     this.setDefault();
+  }
+  // 登录检测
+  loginMonitor = () => {
+    const userInfo = minix.getItem('userInfo');
+    if (!userInfo) {
+      this.props.history.push('/login');
+      message.warning('请先登录!');
+    }
   }
   // 左侧导航的收合
   toggle = () => {
@@ -56,7 +67,6 @@ export default class LeftNav extends Component {
     const { path } = this.props.match;
     // 寻找相同路径
     const findPath = (arrTree) => {
-      // debugger
       arrTree.map(item => {
         if (item.child) {
           return findPath(item.child)
@@ -134,7 +144,7 @@ export default class LeftNav extends Component {
             >
               <Meta
                 className={this.state.collapsed ? "hide" : "show"}
-                avatar={<Avatar src="assets/logo.jpg" />}
+                avatar={<Avatar src={this.state.userInfo.avatar} />}
                 description={this.state.collapsed || "to be stronger"}
               />
             </Card>
@@ -174,7 +184,16 @@ export default class LeftNav extends Component {
               >
                 github
               </Button>
-              <Button className="ell" title="wangkaiwd" icon="user">wangkaiwd</Button>
+              <Popover>
+
+              </Popover>
+              <Button
+                className="ell"
+                title={this.state.userInfo.user_name}
+                icon="user"
+              >
+                {this.state.userInfo.user_name}
+              </Button>
             </div>
           </Header>
           <Content className="leftnav-content">

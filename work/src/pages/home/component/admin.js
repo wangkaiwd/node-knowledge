@@ -32,7 +32,7 @@ class Admin extends Component {
     this.setState({ loading: true })
     fetchLoginAdminList(params, res => {
       this.setState({
-        dataSource: res,
+        dataSource: res.data,
         loading: false,
       })
     });
@@ -66,23 +66,27 @@ function columns() {
   return [
     {
       title: '姓名',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'user_name',
+      key: 'user_name',
+      width: '8%'
     },
     {
       title: '注册日期',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'create_time',
+      key: 'create_time',
+      width: '15%',
     },
     {
       title: '地址',
-      dataIndex: 'description',
-      key: 'description',
+      dataIndex: 'city',
+      key: 'city',
+      width: '10%'
     },
     {
       title: '权限',
-      dataIndex: 'index',
-      key: 'index',
+      dataIndex: 'admin',
+      key: 'admin',
+      width: '8%',
     },
   ]
 }

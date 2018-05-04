@@ -57,7 +57,6 @@ class Login extends Component {
         this.setState({ loginLoading: false })
         this.props.history.push(`/index`);
         fetchLoginAdminInfo({}, res => {
-          // console.log(res);
           setItem('userInfo', res.data)
           setItem('isChecked', this.state.isChecked);
         })
@@ -68,9 +67,15 @@ class Login extends Component {
   }
   // 获取验证码
   getCode = () => {
-    this.setState({ isGetCode: false });
-    fetchLoginGetcode({}, (res) => this.setState({ codeImg: res.code }));
-    this.timeDown();
+    this.setState({ codeLoading: true })
+    fetchLoginGetcode({}, (res) => {
+      this.setState({
+        codeImg: res.code,
+        isGetCode: false,
+        codeLoading: false
+      });
+      this.timeDown();
+    })
   }
   // 倒计时
   timeDown = () => {
@@ -84,10 +89,6 @@ class Login extends Component {
       countdown--;
       this.setState({ countdown });
     }, 1000)
-  }
-  // 记忆密码
-  handleRemember = () => {
-
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -151,7 +152,7 @@ class Login extends Component {
               <FormItem>
                 {this.state.isGetCode
                   ?
-                  <Button type="primary" onClick={this.getCode}>获取验证码</Button>
+                  <Button type="primary" onClick={this.getCode} loading={this.state.codeLoading}>获取验证码</Button>
                   :
                   <Button type="primary" disabled>
                     <span>{this.state.countdown}</span>
@@ -164,7 +165,7 @@ class Login extends Component {
                   valuePropName: 'checked',
                   initialValue: this.state.isChecked,
                 })(
-                  <Checkbox onChange={this.handleRemember}>Remember me</Checkbox>
+                  <Checkbox onChange={(e) => this.setState({ isChecked: e.target.checked })}>Remember me</Checkbox>
                 )}
                 <Button
                   type="primary"

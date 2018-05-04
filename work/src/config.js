@@ -2,8 +2,9 @@
 import React from 'react'
 import Home from 'src/pages/home'
 import MyTable from 'src/pages/table'
-import MyModal from 'src/pages/modal'
-const Option = () => <div>option</div>
+import Prize from 'src/pages/modal'
+import Setting from 'src/pages/setting'
+// const Option = () => <div>option</div>
 // 左侧导航配置文件
 export const leftNavConfig = [
   {
@@ -23,28 +24,21 @@ export const leftNavConfig = [
   {
     key: '3',
     icon: 'folder-add',
-    content: '模态框',
-    child: [
-      {
-        key: '3-1',
-        icon: '',
-        href: '/modal',
-        content: 'option1',
-        component: MyModal,
-      }
-    ]
+    content: '抽奖',
+    href: '/prize',
+    component: Prize,
   },
   {
     key: '4',
     icon: 'mail',
-    content: '文件夹',
+    content: '设置',
     child: [
       {
         key: '4-1',
         icon: '',
-        content: 'option1',
-        href: '/option',
-        component: Option,
+        content: '说明',
+        href: '/setting',
+        component: Setting,
       },
     ]
   }

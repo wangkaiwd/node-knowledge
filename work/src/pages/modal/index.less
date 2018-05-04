@@ -1,0 +1,58 @@
+.ld-container {
+  position: relative;
+  width: 400px;
+  margin: 100px auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.ld-contain {
+  display: flex;
+  /* 默认不换行，在一排显示 */
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.ld-contain .row {
+  display: flex;
+  height: 100px;
+  flex-basis: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rowitem {
+  width: 90px;
+  height: 90px;
+  border-radius: 5px;
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.ld-contain .startbtn-box .startbtn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  cursor: pointer;
+  outline: none;
+}
+
+.active {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 90px;
+  background: rgba(22, 72, 146, 0.8);
+  transform: scale(2);
+}

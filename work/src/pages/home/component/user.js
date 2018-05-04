@@ -66,18 +66,21 @@ function columns() {
   return [
     {
       title: '注册日期',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'registe_time',
+      key: 'registe_time',
+      width: '20%',
     },
     {
       title: '用户姓名',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'username',
+      key: 'username',
+      width: '20%',
     },
     {
       title: '注册地址',
-      dataIndex: 'description',
-      key: 'description',
+      dataIndex: 'city',
+      key: 'city',
+      width: '20%',
     },
   ]
 }

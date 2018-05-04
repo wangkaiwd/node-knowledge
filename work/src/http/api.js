@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 23:58:50
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-03 14:13:30
+ * @Last Modified time: 2018-05-03 15:13:41
  * @Desc: 项目请求接口
  */
 import { ajaxFunc } from './ajax';
@@ -43,7 +43,7 @@ export const fetchLoginUsersList = ajaxFunc('/v1/users/list');
 export const fetchLoginUsersCount = ajaxFunc('/v1/users/count');
 
 // 管理员列表
-export const fetchLoginAdminList = ajaxFunc('/v1/admin/all');
+export const fetchLoginAdminList = ajaxFunc('/admin/all');
 
 // 获取管理员数量
 export const fetchLoginAdminCount = ajaxFunc('/admin/count');

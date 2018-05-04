@@ -1,4 +1,4 @@
-import { Form, Input, Button, Row, Col, message, Modal, Cascader } from 'antd';
+import { Form, Input, Button, Row, Col, message, Modal, Cascader, Icon, Upload } from 'antd';
 const FormItem = Form.Item;
 
 import React, { Component } from 'react'
@@ -15,6 +15,15 @@ class UpdateModal extends Component {
     this.props.onRef(this);
   }
   handleOk = () => {
+
+  }
+  // 上传图片之前
+  beforeUpload = (file) => {
+    console.log('file', file);
+  }
+  // 自定义上传方式
+  handleCustomRequest = () => {
+    console.log('self');
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -28,7 +37,12 @@ class UpdateModal extends Component {
         sm: { span: 20 },
       },
     };
-    // console.log('itemvalue', this.state.itemValue);
+    const uploadButton = (
+      <div>
+        <Icon type={this.state.loading ? 'loading' : 'plus'} />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
     return (
       <Modal
         {...this.modalOption()}
@@ -84,6 +98,27 @@ class UpdateModal extends Component {
               <Cascader>
 
               </Cascader>
+            )}
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="商铺图片"
+          >
+            {getFieldDecorator('image_path', {
+
+            })(
+              <Upload
+                name="image_path"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                // action="http://cangdu.org:8001/v1/addimg/shop"
+                customRequest={this.handleCustomRequest}
+                // onChange={this.handleChange}
+                beforeUpload={this.beforeUpload}
+              >
+                {uploadButton}
+              </Upload>
             )}
           </FormItem>
         </Form>
