@@ -6,9 +6,11 @@ import {
   Card,
   Avatar,
   Popover,
+  message,
 } from 'antd';
 import React, { Component } from 'react';
 import { leftNavConfig } from 'src/config';
+import { fetchLoginSingout } from 'src/http/api';
 import * as minix from "src/utils/minix";
 import {
   HashRouter as Router,
@@ -41,6 +43,8 @@ export default class LeftNav extends Component {
       defaultSelectedKeys: ['1'],
       defaultOpenKeys: [],
       userInfo: minix.getItem('userInfo') || {},
+      // 气泡卡片是否显示
+      visible: false,
     };
   }
   componentWillMount = () => {
@@ -54,6 +58,14 @@ export default class LeftNav extends Component {
       this.props.history.push('/login');
       message.warning('请先登录!');
     }
+  }
+  //
+  singout = () => {
+    fetchLoginSingout({}, (res) => {
+      message.success(res.success);
+    })
+    this.props.history.push('/login');
+    localStorage.clear();
   }
   // 左侧导航的收合
   toggle = () => {
@@ -100,7 +112,6 @@ export default class LeftNav extends Component {
         return <Route key={item.key} path={`${this.props.match.path}${item.href}`} component={item.component} />
       })
     )
-
   }
   // 递归生成二级菜单
   renderSubMenu = (menuTree) => {
@@ -125,6 +136,9 @@ export default class LeftNav extends Component {
       </SubMenu>
     )
   }
+  handleVisibleChange = (visible) => {
+    this.setState({ visible });
+  }
   render() {
     /**
      * 如果父组件中没有配置路由的话
@@ -144,7 +158,7 @@ export default class LeftNav extends Component {
             >
               <Meta
                 className={this.state.collapsed ? "hide" : "show"}
-                avatar={<Avatar src={this.state.userInfo.avatar} />}
+                avatar={<Avatar src="../../assets/logo.jpg" />}
                 description={this.state.collapsed || "to be stronger"}
               />
             </Card>
@@ -184,16 +198,21 @@ export default class LeftNav extends Component {
               >
                 github
               </Button>
-              <Popover>
-
-              </Popover>
-              <Button
-                className="ell"
-                title={this.state.userInfo.user_name}
-                icon="user"
+              <Popover
+                content={<a onClick={this.singout}>singout</a>}
+                trigger="click"
+                visible={this.state.visible}
+                onVisibleChange={this.handleVisibleChange}
               >
-                {this.state.userInfo.user_name}
-              </Button>
+                <Button
+                  className="ell"
+                  title={this.state.userInfo.user_name}
+                  icon="user"
+                >
+                  {this.state.userInfo.user_name}
+                </Button>
+              </Popover>
+
             </div>
           </Header>
           <Content className="leftnav-content">
