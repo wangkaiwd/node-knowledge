@@ -1,4 +1,13 @@
+/*
+ * @Author: wangkai
+ * @Date: 2018-05-06 12:43:52
+ * @Last Modified by: wangkai
+ * @Last Modified time: 2018-05-06 12:58:31
+ * @Desc: 抽奖页面
+ */
+
 import React, { Component } from 'react';
+import { Button } from 'antd';
 import './index.less';
 import RowItem from './component/rowItem';
 
@@ -79,7 +88,14 @@ class LotterDraw extends Component {
             <RowItem activeId={activeId} activeNum="6" />
           </div>
           <div className="startbtn-box">
-            <button disabled={this.state.isRolling} className="startbtn" onClick={this.handleBegin}>begin</button>
+            <Button
+              disabled={this.state.isRolling}
+              className="startbtn"
+              onClick={this.handleBegin}
+              type="primary"
+            >
+              begin
+            </Button>
           </div>
         </div>
       </div>

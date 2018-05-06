@@ -11,7 +11,6 @@ import {
 import React, { Component } from 'react';
 import { leftNavConfig } from 'src/config';
 import { fetchLoginSingout } from 'src/http/api';
-import * as minix from "src/utils/minix";
 import {
   HashRouter as Router,
   Switch,
@@ -20,11 +19,12 @@ import {
   Link,
 } from 'react-router-dom'
 import "./leftNav.less"
+import * as minix from "src/utils/minix";
+
 
 const { Meta } = Card;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
-
 const { Header, Sider, Content } = Layout;
 /**
  * @todo:
@@ -48,18 +48,10 @@ export default class LeftNav extends Component {
     };
   }
   componentWillMount = () => {
-    this.loginMonitor();
+    // this.loginMonitor();
     this.setDefault();
   }
-  // 登录检测
-  loginMonitor = () => {
-    const userInfo = minix.getItem('userInfo');
-    if (!userInfo) {
-      this.props.history.push('/login');
-      message.warning('请先登录!');
-    }
-  }
-  //
+  // 退出登录
   singout = () => {
     fetchLoginSingout({}, (res) => {
       message.success(res.success);
@@ -219,7 +211,7 @@ export default class LeftNav extends Component {
             <Switch>
               {this.createRoute(leftNavConfig)}
               {/* 由于使用了Switch,所以在匹配到其它自己没有配置的路由会跳转到'/tab' */}
-              <Redirect to={`${this.props.match.path}/tab`} />
+              <Redirect to={`${this.props.match.path}/dashboard`} />
             </Switch>
           </Content>
         </Layout>

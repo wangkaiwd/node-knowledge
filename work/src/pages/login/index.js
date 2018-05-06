@@ -32,6 +32,12 @@ class Login extends Component {
   componentDidMount = () => {
     this.setUserInfo();
   }
+  // 在组件卸载时结束通过return结束callback中的setState
+  componentWillUnmount = () => {
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
   // 写入用户名
   setUserInfo = () => {
     const userInfo = getItem('userInfo') || {};
@@ -45,6 +51,12 @@ class Login extends Component {
   }
   // 提交登录信息
   handleSubmit = (e) => {
+    /**
+     * FIXME:
+     *  1. 由于自己在路由跳转时进行了异步的ajax（axios）请求
+     *  2. 在请求的回调函数中调用了this.setState();
+     *  3. 当路由切换时，组件已经被卸载了，此时异步操作callback还在执行，所以setState无法或取到state中的值
+     */
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (err) {
@@ -54,16 +66,17 @@ class Login extends Component {
       this.setState({ loginLoading: true });
       fetchLoginAdmin(params, (res) => {
         message.warning(res.success);
-        this.setState({ loginLoading: false })
-        this.props.history.push(`/index`);
-        fetchLoginAdminInfo({}, res => {
-          setItem('userInfo', res.data)
-          setItem('isChecked', this.state.isChecked);
-        })
+        this.setState({ loginLoading: false }, () => {
+          fetchLoginAdminInfo({}, res => {
+            setItem('userInfo', res.data)
+            setItem('isChecked', this.state.isChecked);
+            this.props.history.push(`/index/dashboard`);
+          })
+        });
       }, err => {
         this.setState({ loginLoading: false })
       })
-    })
+    });
   }
   // 获取验证码
   getCode = () => {

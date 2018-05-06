@@ -1,3 +1,10 @@
+/*
+ * @Author: wangkai
+ * @Date: 2018-05-06 12:40:58
+ * @Last Modified by:   wangkai
+ * @Last Modified time: 2018-05-06 12:40:58
+ * @Desc: 商品信息更新模态框
+ */
 import { Form, Input, Button, Row, Col, message, Modal, Cascader, Icon, Upload } from 'antd';
 const FormItem = Form.Item;
 
