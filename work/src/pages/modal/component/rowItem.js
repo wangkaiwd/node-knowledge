@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-05-06 12:45:16
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-06 12:45:55
+ * @Last Modified time: 2018-05-07 11:50:41
  * @Desc: 每一个抽奖的item
  */
 
@@ -21,7 +21,7 @@ export default class RowItem extends Component {
       <div>
         <div className="rowitem">
           <span className={activeId === activeNum ? 'active' : ''}>
-            {activeNum}
+            <img src={`../../assets/${activeNum + 1}.png`} alt="" />
           </span>
         </div>
       </div>

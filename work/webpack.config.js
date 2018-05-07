@@ -47,8 +47,11 @@ module.exports = {
           'css-loader',
           'less-loader'
         ]
-      }
-
+      },
+      {
+        test: /\.(htm|html)$/,
+        use: 'html-withimg-loader'
+      },
     ]
   },
   resolve: {

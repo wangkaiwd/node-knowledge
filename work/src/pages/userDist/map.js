@@ -2,28 +2,34 @@
  * @Author: wangkai
  * @Date: 2018-05-06 14:31:51
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-06 15:39:40
- * @Desc: echarts地图
+ * @Last Modified time: 2018-05-07 15:19:50
+ * @Desc: 用户分布信息图
  */
 import React, { Component } from 'react'
+import { fetchUserCityCount } from 'src/http/api'
 import echarts from 'echarts'
 import './map.less'
 class map extends Component {
   constructor() {
     super()
     this.state = {
-
+      city: {},
     }
   }
   componentDidMount = () => {
-    this.initCharts();
+    this.getData();
+    // this.initCharts();
+  }
+  getData = () => {
+    fetchUserCityCount({}, res => this.setState({ city: res.user_city }, () => this.initCharts()));
   }
   initCharts = () => {
-    const userDistCharts = echarts.init(this.echartsNode);
+    const container = document.querySelector('.map-container');
+    const userDistCharts = echarts.init(container);
+    const { beijing, shanghai, hangzhou, shenzhen, qita } = this.state.city;
     const option = {
       title: {
         text: '用户分布',
-        subtext: '纯属虚构',
         x: 'center'
       },
       tooltip: {
@@ -33,7 +39,7 @@ class map extends Component {
       legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+        data: ['北京', '上海', '深圳', '杭州', '其它']
       },
       series: [
         {
@@ -42,11 +48,11 @@ class map extends Component {
           radius: '55%',
           center: ['50%', '60%'],
           data: [
-            { value: 335, name: '直接访问' },
-            { value: 310, name: '邮件营销' },
-            { value: 234, name: '联盟广告' },
-            { value: 135, name: '视频广告' },
-            { value: 1548, name: '搜索引擎' }
+            { value: beijing, name: '北京' },
+            { value: shanghai, name: '上海' },
+            { value: shenzhen, name: '深圳' },
+            { value: hangzhou, name: '杭州' },
+            { value: qita, name: '其它' }
           ],
           itemStyle: {
             emphasis: {
@@ -59,11 +65,15 @@ class map extends Component {
       ]
     };
     userDistCharts.setOption(option);
+    userDistCharts.resize();
+    // debugger
+    window.addEventListener('resize', () => {
+      userDistCharts.resize();
+    })
   }
   render() {
     return (
-      <div className="map" ref={(echartsNode) => this.echartsNode = echartsNode}>
-
+      <div className="map-container" style={{ width: '100%', height: '100%' }}>
       </div>
     )
   }

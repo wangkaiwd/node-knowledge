@@ -21,7 +21,6 @@ import {
 import "./leftNav.less"
 import * as minix from "src/utils/minix";
 
-
 const { Meta } = Card;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -55,9 +54,9 @@ export default class LeftNav extends Component {
   singout = () => {
     fetchLoginSingout({}, (res) => {
       message.success(res.success);
+      this.props.history.push('/login');
+      localStorage.clear();
     })
-    this.props.history.push('/login');
-    localStorage.clear();
   }
   // 左侧导航的收合
   toggle = () => {

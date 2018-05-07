@@ -6,9 +6,16 @@ import './tabs.less';
 /**
  * @description 传入tab配置即可进行tab页面的渲染
  * @author wangkaiwd
- * @export
- * @class MyTabs
- * @extends {Component}
+ * @param:
+ *  传入一个数组
+ *  title:tab标题
+ *  key: tab索引
+ *  link: tab对应的内容组件
+ * @example:
+ *  tabConfig: [
+      { title: '管理员', key: '1', link: Admin },
+      { title: '用户', key: '2', link: User }
+    ]
  * @todo:
  *  在页面进行刷新的时候如何保证当前激活的tab不进行变化
  * 暂时解决方法：

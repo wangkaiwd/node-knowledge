@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-05-06 12:43:52
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-06 12:58:31
+ * @Last Modified time: 2018-05-07 12:42:59
  * @Desc: 抽奖页面
  */
 
@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import './index.less';
 import RowItem from './component/rowItem';
+import { message } from 'antd'
 
 class LotterDraw extends Component {
   constructor() {
@@ -25,6 +26,9 @@ class LotterDraw extends Component {
   // 开始进行抽奖
   handleBegin() {
     this.initLuckData();
+    // if (this.state.isRolling) {
+    //   message.warning('正在摇奖,请勿重复点击');
+    // }
     // debugger;
     // 启动定时器
     // 这里由于setState执行是异步的，所以获取时有可能为''，在赋值之后直接进行获取，
@@ -64,38 +68,39 @@ class LotterDraw extends Component {
   render() {
     let activeId = this.state.activeId;
     return (
-      <div className="ld-container">
-        <div className="ld-contain">
-          <div className="row">
-            {/* 这里的activeNum是后端给的id,其中可能还包括一些其他的信息 */}
-            <RowItem activeId={activeId} activeNum="0" />
-            <RowItem activeId={activeId} activeNum="1" />
-            <RowItem activeId={activeId} activeNum="2" />
-            <RowItem activeId={activeId} activeNum="3" />
-          </div>
-          <div className="row">
-            <RowItem activeId={activeId} activeNum="11" />
-            <RowItem activeId={activeId} activeNum="4" />
-          </div>
-          <div className="row">
-            <RowItem activeId={activeId} activeNum="10" />
-            <RowItem activeId={activeId} activeNum="5" />
-          </div>
-          <div className="row">
-            <RowItem activeId={activeId} activeNum="9" />
-            <RowItem activeId={activeId} activeNum="8" />
-            <RowItem activeId={activeId} activeNum="7" />
-            <RowItem activeId={activeId} activeNum="6" />
-          </div>
-          <div className="startbtn-box">
-            <Button
-              disabled={this.state.isRolling}
-              className="startbtn"
-              onClick={this.handleBegin}
-              type="primary"
-            >
-              begin
-            </Button>
+      <div className="prize">
+        <div className="ld-container">
+          <div className="ld-contain">
+            <div className="row">
+              {/* 这里的activeNum是后端给的id,其中可能还包括一些其他的信息 */}
+              <RowItem activeId={activeId} activeNum="0" />
+              <RowItem activeId={activeId} activeNum="1" />
+              <RowItem activeId={activeId} activeNum="2" />
+              <RowItem activeId={activeId} activeNum="3" />
+            </div>
+            <div className="row">
+              <RowItem activeId={activeId} activeNum="11" />
+              <RowItem activeId={activeId} activeNum="4" />
+            </div>
+            <div className="row">
+              <RowItem activeId={activeId} activeNum="10" />
+              <RowItem activeId={activeId} activeNum="5" />
+            </div>
+            <div className="row">
+              <RowItem activeId={activeId} activeNum="9" />
+              <RowItem activeId={activeId} activeNum="8" />
+              <RowItem activeId={activeId} activeNum="7" />
+              <RowItem activeId={activeId} activeNum="6" />
+            </div>
+            <div className="startbtn-box">
+              <Button
+                className="startbtn"
+                disabled={this.state.isRolling}
+                onClick={this.handleBegin}
+                type="primary"
+              >
+              </Button>
+            </div>
           </div>
         </div>
       </div>

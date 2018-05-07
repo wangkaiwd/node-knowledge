@@ -7,9 +7,8 @@ import "./index.less"
 import { userInfo } from 'os';
 /**
  * TODO:
- * 1. 记住用户名
- * 2. 存储用户信息
- * 3. 用户列表和管理员列表
+ * 1. 记录用户名和密码功能
+ * 2. 如果用户已经是登录状态的话，下次直接登录
  */
 class Login extends Component {
   constructor() {
@@ -30,7 +29,7 @@ class Login extends Component {
     }
   }
   componentDidMount = () => {
-    this.setUserInfo();
+    // this.setUserInfo();
   }
   // 在组件卸载时结束通过return结束callback中的setState
   componentWillUnmount = () => {
@@ -51,12 +50,6 @@ class Login extends Component {
   }
   // 提交登录信息
   handleSubmit = (e) => {
-    /**
-     * FIXME:
-     *  1. 由于自己在路由跳转时进行了异步的ajax（axios）请求
-     *  2. 在请求的回调函数中调用了this.setState();
-     *  3. 当路由切换时，组件已经被卸载了，此时异步操作callback还在执行，所以setState无法或取到state中的值
-     */
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (err) {
@@ -64,6 +57,12 @@ class Login extends Component {
       }
       const { remember, captcha_code, ...params } = values;
       this.setState({ loginLoading: true });
+      /**
+       * FIXME: 对细节部分进行的处理
+       *  1. 由于自己在路由跳转时进行了异步的ajax（axios）请求
+       *  2. 在请求的回调函数中调用了this.setState();
+       *  3. 当路由切换时，组件已经被卸载了，此时异步操作callback还在执行，所以setState无法获取到state中的值
+       */
       fetchLoginAdmin(params, (res) => {
         message.warning(res.success);
         this.setState({ loginLoading: false }, () => {
@@ -174,12 +173,12 @@ class Login extends Component {
                 }
               </FormItem>
               <FormItem>
-                {getFieldDecorator('remember', {
+                {/* {getFieldDecorator('remember', {
                   valuePropName: 'checked',
                   initialValue: this.state.isChecked,
                 })(
                   <Checkbox onChange={(e) => this.setState({ isChecked: e.target.checked })}>Remember me</Checkbox>
-                )}
+                )} */}
                 <Button
                   type="primary"
                   htmlType="submit"

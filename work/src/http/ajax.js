@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 23:57:48
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-02 18:07:43
+ * @Last Modified time: 2018-05-07 09:13:16
  * @Desc: axios进行封装
  */
 
@@ -11,6 +11,7 @@ import axios from 'axios';
 import { message } from 'antd'
 import httpConfig from 'src/http/httpConfig'
 import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import qs from 'qs'
 
 // 创建axios的实例
