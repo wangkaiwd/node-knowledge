@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-04-28 23:58:50
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-07 15:45:16
+ * @Last Modified time: 2018-05-07 15:55:04
  * @Desc: 项目请求接口
  */
 import dayjs from 'dayjs';
@@ -76,3 +76,5 @@ export const fetchTotalOrderCount = ajaxFunc('/bos/orders/count');
 // 图表展示
 // 获取用户分布信息
 export const fetchUserCityCount = ajaxFunc('/v1/user/city/count');
+
+// 获取一周趋势图

@@ -10,7 +10,6 @@ import {
 } from 'antd';
 import React, { Component } from 'react';
 import { leftNavConfig } from 'src/config';
-import { fetchLoginSingout } from 'src/http/api';
 import {
   HashRouter as Router,
   Switch,
@@ -18,6 +17,7 @@ import {
   Redirect,
   Link,
 } from 'react-router-dom'
+import Top from 'src/component/header/index'
 import "./leftNav.less"
 import * as minix from "src/utils/minix";
 
@@ -47,7 +47,6 @@ export default class LeftNav extends Component {
     };
   }
   componentWillMount = () => {
-    // this.loginMonitor();
     this.setDefault();
   }
   // 退出登录
@@ -74,10 +73,11 @@ export default class LeftNav extends Component {
         if (item.child) {
           return findPath(item.child)
         }
-        if (`${path}${item.href}` === pathname) {
+        if (`${path}${item.key}` === pathname) {
+          const openkeys = item.key.slice(0, item.key.lastIndexOf('/'))
           this.setState({
             defaultSelectedKeys: [item.key],
-            defaultOpenKeys: [item.key.charAt(0)],
+            defaultOpenKeys: [openkeys],
           });
         }
       })
@@ -90,7 +90,7 @@ export default class LeftNav extends Component {
     const loopClick = (arrTree) => {
       arrTree.map(item => {
         if (item.child) return loopClick(item.child);
-        if (item.key === e.key) this.props.history.push(`${this.props.match.path}${item.href}`);
+        if (item.key === e.key) this.props.history.push(`${this.props.match.path}${item.key}`);
       })
     }
     loopClick(leftNavConfig)
@@ -100,7 +100,7 @@ export default class LeftNav extends Component {
     return (
       routeTree.map(item => {
         if (item.child) return this.createRoute(item.child);
-        return <Route key={item.key} path={`${this.props.match.path}${item.href}`} component={item.component} />
+        return <Route key={item.key} path={`${this.props.match.path}${item.key}`} component={item.component} />
       })
     )
   }
@@ -127,10 +127,8 @@ export default class LeftNav extends Component {
       </SubMenu>
     )
   }
-  handleVisibleChange = (visible) => {
-    this.setState({ visible });
-  }
   render() {
+    const { userInfo } = this.state;
     /**
      * 如果父组件中没有配置路由的话
      * this.props对象中是不会有关于路由的对象的
@@ -145,11 +143,10 @@ export default class LeftNav extends Component {
           collapsed={this.state.collapsed}
         >
           <div className="logo">
-            <Card
-            >
+            <Card>
               <Meta
                 className={this.state.collapsed ? "hide" : "show"}
-                avatar={<Avatar src="../../assets/logo.jpg" />}
+                avatar={<Avatar src={`//elm.cangdu.org/img/${userInfo.avatar}`} />}
                 description={this.state.collapsed || "to be stronger"}
               />
             </Card>
@@ -175,37 +172,10 @@ export default class LeftNav extends Component {
           </Menu>
         </Sider>
         <Layout>
-          <Header className="leftnav-header">
-            <Icon
-              className="trigger"
-              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={this.toggle}
-            />
-            <div className="personal-center">
-              <Button
-                className="ell"
-                icon="github"
-                onClick={() => location.href = "https://github.com/wangkaiwd"}
-              >
-                github
-              </Button>
-              <Popover
-                content={<a onClick={this.singout}>singout</a>}
-                trigger="click"
-                visible={this.state.visible}
-                onVisibleChange={this.handleVisibleChange}
-              >
-                <Button
-                  className="ell"
-                  title={this.state.userInfo.user_name}
-                  icon="user"
-                >
-                  {this.state.userInfo.user_name}
-                </Button>
-              </Popover>
-
-            </div>
-          </Header>
+          <Top
+            userInfo={userInfo}
+            type={this.state.collapsed}
+          />
           <Content className="leftnav-content">
             <Switch>
               {this.createRoute(leftNavConfig)}

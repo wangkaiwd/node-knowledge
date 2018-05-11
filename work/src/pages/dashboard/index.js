@@ -2,12 +2,12 @@
  * @Author: wangkai
  * @Date: 2018-05-06 14:20:31
  * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-07 14:07:57
+ * @Last Modified time: 2018-05-11 22:43:41
  * @Desc: 仪表盘页面
  * 主要进行一些数据的展示
  */
 import React, { Component } from 'react'
-import { Card, Button } from 'antd';
+import { Card, Button, message } from 'antd';
 import Tabs from 'src/component/tabs';
 import Today from './component/today';
 import Total from './component/total';
