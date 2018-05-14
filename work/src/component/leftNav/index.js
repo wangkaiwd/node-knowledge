@@ -84,6 +84,34 @@ export default class LeftNav extends Component {
     }
     findPath(leftNavConfig);
   }
+  // 初始化选中菜单
+  initMenu = () => {
+    this.setState({ defaultSelectedKeys: ['1'] });
+  }
+  // 获取面包屑导航配置
+  getBreadConfig = () => {
+    let breadConfig = [
+      { content: '' },
+      { content: '' },
+    ];
+    // leftNavConfig
+    const { pathname } = this.props.location;
+    const { path } = this.props.match;
+    const firstPath = pathname.slice(0, pathname.lastIndexOf('/'));
+    leftNavConfig.map((item) => {
+      if (`${path}${item.key}` === firstPath) {
+        breadConfig[0].content = item.content;
+      }
+      if (item.child) {
+        item.child.map((_item) => {
+          if (`${path}${_item.key}` === pathname) {
+            breadConfig[1].content = _item.content;
+          }
+        })
+      }
+    })
+    return breadConfig;
+  }
   // 点击跳转对应路由
   handleMenuClick = (e) => {
     // 寻找相同的key
@@ -147,7 +175,6 @@ export default class LeftNav extends Component {
               <Meta
                 className={this.state.collapsed ? "hide" : "show"}
                 avatar={<Avatar src={`//elm.cangdu.org/img/${userInfo.avatar}`} />}
-                description={this.state.collapsed || "to be stronger"}
               />
             </Card>
           </div>
@@ -155,11 +182,10 @@ export default class LeftNav extends Component {
             theme="dark"
             onClick={this.handleMenuClick}
             mode="inline"
-            defaultSelectedKeys={this.state.defaultSelectedKeys}
+            defaultSelectedKeys="['1']"
             defaultOpenKeys={this.state.defaultOpenKeys}
           >
             {leftNavConfig.map(item => {
-              // debugger;
               if (item.child) return this.renderSubMenu(item)
               return (
                 <Menu.Item key={item.key}>
@@ -168,14 +194,17 @@ export default class LeftNav extends Component {
                 </Menu.Item>
               )
             })}
-
           </Menu>
         </Sider>
         <Layout>
           <Top
             userInfo={userInfo}
             type={this.state.collapsed}
+            toggle={this.toggle}
+            initMenu={this.initMenu}
+            breadConfig={this.getBreadConfig()}
           />
+          <Button onClick={this.initMenu}>click</Button>
           <Content className="leftnav-content">
             <Switch>
               {this.createRoute(leftNavConfig)}
@@ -184,7 +213,7 @@ export default class LeftNav extends Component {
             </Switch>
           </Content>
         </Layout>
-      </Layout>
+      </Layout >
     );
   }
 }

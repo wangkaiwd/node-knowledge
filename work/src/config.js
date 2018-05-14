@@ -1,16 +1,14 @@
-
 import React from 'react'
 import Dashboard from 'src/pages/dashboard'
 import Home from 'src/pages/home'
 import ShopInfo from 'src/pages/table'
-import Prize from 'src/pages/modal'
 import Setting from 'src/pages/setting'
 import Userdist from 'src/pages/userDist/map'
 
 /**
  * 知识点：
  * 1. key是唯一标识，只要是字符串都可以，并不是只能使用'1','2','3'...等字符串
- * 2. 可以将key设置路由来进行唯一标识
+ * 2. 可以将key设置为路由地址来进行唯一标识
  */
 
 // 左侧导航配置文件
@@ -39,12 +37,6 @@ export const leftNavConfig = [
         component: ShopInfo
       },
     ]
-  },
-  {
-    key: '/prize',
-    icon: 'gift',
-    content: '抽奖',
-    component: Prize,
   },
   {
     key: '/charts',
