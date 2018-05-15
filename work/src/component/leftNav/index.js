@@ -39,8 +39,9 @@ export default class LeftNav extends Component {
     super();
     this.state = {
       collapsed: false,
-      defaultSelectedKeys: ['1'],
+      defaultSelectedKeys: ['/dashboard'],
       defaultOpenKeys: [],
+      selectedKeys: ['/dashboard'],
       userInfo: minix.getItem('userInfo') || {},
       // 气泡卡片是否显示
       visible: false,
@@ -86,7 +87,7 @@ export default class LeftNav extends Component {
   }
   // 初始化选中菜单
   initMenu = () => {
-    this.setState({ defaultSelectedKeys: ['1'] });
+    this.setState({ selectedKeys: ['/dashboard'] });
   }
   // 获取面包屑导航配置
   getBreadConfig = () => {
@@ -118,7 +119,10 @@ export default class LeftNav extends Component {
     const loopClick = (arrTree) => {
       arrTree.map(item => {
         if (item.child) return loopClick(item.child);
-        if (item.key === e.key) this.props.history.push(`${this.props.match.path}${item.key}`);
+        if (item.key === e.key) {
+          this.props.history.push(`${this.props.match.path}${item.key}`);
+          this.setState({ selectedKeys: [item.key] });
+        }
       })
     }
     loopClick(leftNavConfig)
@@ -182,8 +186,9 @@ export default class LeftNav extends Component {
             theme="dark"
             onClick={this.handleMenuClick}
             mode="inline"
-            defaultSelectedKeys="['1']"
+            defaultSelectedKeys={this.state.defaultSelectedKeys}
             defaultOpenKeys={this.state.defaultOpenKeys}
+            selectedKeys={this.state.selectedKeys}
           >
             {leftNavConfig.map(item => {
               if (item.child) return this.renderSubMenu(item)
@@ -204,7 +209,6 @@ export default class LeftNav extends Component {
             initMenu={this.initMenu}
             breadConfig={this.getBreadConfig()}
           />
-          <Button onClick={this.initMenu}>click</Button>
           <Content className="leftnav-content">
             <Switch>
               {this.createRoute(leftNavConfig)}

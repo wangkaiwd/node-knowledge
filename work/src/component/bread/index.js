@@ -8,6 +8,7 @@ class Bread extends Component {
     this.state = {
 
     }
+    // debugger
   }
   handleClick = (route) => {
     const { history, initMenu } = this.props;
