@@ -1,54 +1,94 @@
 /*
  * @Author: wangkai
  * @Date: 2018-05-06 12:40:58
- * @Last Modified by:   wangkai
- * @Last Modified time: 2018-05-06 12:40:58
+ * @Last Modified by: wangkaiwd
+ * @Last Modified time: 2018-05-19 23:07:54
  * @Desc: 商品信息更新模态框
  */
-import { Form, Input, Button, Row, Col, message, Modal, Cascader, Icon, Upload } from 'antd';
+import { Form, Input, Button, Row, Col, message, Modal, Cascader, Icon, Upload, Select } from 'antd';
 const FormItem = Form.Item;
-
+import * as updateConfig from './config'
 import React, { Component } from 'react'
+import { fetchRestaurantCategory, fetchAddimgShop } from 'src/http/api'
+
 class UpdateModal extends Component {
   constructor() {
     super()
     this.state = {
-      visible: false,
-      itemValue: {},
+      categoryList: [],
+      shopImgpath: '',
     }
-    this.modalOption = modalOption.bind(this);
+    this.modalOption = updateConfig.modalOption.bind(this);
+    this.options = updateConfig.options.bind(this);
+    this.getShopAllCategory = updateConfig.getShopAllCategory.bind(this);
   }
   componentDidMount = () => {
+    this.getShopAllCategory();
     this.props.onRef(this);
+    this.getDefaultValue();
+
   }
+
+  // 获取表单的默认值
+  getDefaultValue = () => {
+    // console.log(this.props.itemValue);
+    let { name, address, description, phone, category } = this.props.itemValue;
+    const categoryArr = category.split("/");
+    // console.log('category', this.props.form.getFieldsValue());
+    // console.log('categoryArr', categoryArr);
+    // debugger
+    this.props.form.setFieldsValue({
+      name,
+      address,
+      description,
+      phone,
+      category: categoryArr
+    });
+  }
+
   handleOk = () => {
 
   }
   // 上传图片之前
   beforeUpload = (file) => {
-    console.log('file', file);
+    const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
+    if (!isRightType) {
+      message.error('只能上传jpg和png文件!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.warning('图片必须小于 2MB!');
+    }
   }
   // 自定义上传方式
-  handleCustomRequest = () => {
-    console.log('self');
+  // handleCustomRequest = () => {
+  //   const params = { type: 'shop' }
+  //   fetchAddimgShop({}, res => this.setState({ shopImgpath: image_path }))
+  // }
+
+  onChange = (value) => {
+    console.log(value);
+  }
+  handleChange = (file, fileList, event) => {
+    console.log('object', file, fileList, event);
   }
   render() {
     const { getFieldDecorator } = this.props.form;
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 4 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 20 },
-      },
-    };
+    // console.log('value', this.state.itemValue);
+    const formItemLayout = updateConfig.formItemLayout;
     const uploadButton = (
       <div>
         <Icon type={this.state.loading ? 'loading' : 'plus'} />
         <div className="ant-upload-text">Upload</div>
       </div>
+    );
+    const prefixSelector = getFieldDecorator('prefix', {
+      initialValue: '86',
+    })(
+      <Select style={{ width: 70 }}>
+        <Option value="86">+86</Option>
+        <Option value="87">+87</Option>
+      </Select>
     );
     return (
       <Modal
@@ -90,9 +130,12 @@ class UpdateModal extends Component {
             label="联系电话"
           >
             {getFieldDecorator('phone', {
-
+              rules: [
+                { required: true, message: "手机号码不能为空!" },
+                { pattern: /^[1-9]\d*$/, message: "请输入数字!" },
+              ]
             })(
-              <Input />
+              <Input addonBefore={prefixSelector} />
             )}
           </FormItem>
           <FormItem
@@ -100,9 +143,13 @@ class UpdateModal extends Component {
             label="店铺分类"
           >
             {getFieldDecorator('category', {
-
+              initialValue: ['zhejiang', 'hangzhou', 'xihu']
             })(
-              <Cascader>
+              <Cascader
+                // defaultValue={['zhejiang', 'hangzhou', 'xihu']}
+                options={this.options()}
+                onChange={this.onChange}
+              >
 
               </Cascader>
             )}
@@ -119,9 +166,10 @@ class UpdateModal extends Component {
                 listType="picture-card"
                 className="avatar-uploader"
                 showUploadList={false}
-                // action="http://cangdu.org:8001/v1/addimg/shop"
-                customRequest={this.handleCustomRequest}
-                // onChange={this.handleChange}
+                withCredentials={true}
+                // action="https://elm.cangdu.org/v1/addimg/shop"
+                // customRequest={this.handleCustomRequest}
+                onChange={this.handleChange}
                 beforeUpload={this.beforeUpload}
               >
                 {uploadButton}
@@ -134,14 +182,3 @@ class UpdateModal extends Component {
   }
 }
 export default Form.create()(UpdateModal)
-
-// 模态框配置
-function modalOption() {
-  return {
-    visible: this.state.visible,
-    title: '修改店铺信息',
-    maskClosable: true,
-    onCancel: () => this.setState({ visible: false }),
-    onOk: this.handleOk
-  }
-}

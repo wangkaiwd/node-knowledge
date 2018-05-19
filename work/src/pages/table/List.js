@@ -3,9 +3,11 @@ import TabList from 'component/tablist';
 import {
   fetchRestaurantsList,
   fetchRestaurantsCount
-} from "src/http/api"
+} from "src/http/api";
 import * as pagin from 'src/pages/tools/pagin';
-import { Divider, Icon } from 'antd'
+import { Divider, Icon } from 'antd';
+import { withRouter } from 'react-router-dom';
+
 const columns = function () {
   return [
     {
@@ -33,18 +35,18 @@ const columns = function () {
         <span>
           <a href="javascript:;" onClick={() => this.props.handleEdit(record)}>编辑</a>
           <Divider type="vertical" />
-          <a href="javascript:;">添加食品</a>
+          <a href="javascript:;" onClick={() => this.props.history.push('/index/add/goods')}>添加食品</a>
           <Divider type="vertical" />
           <a href="javascript:;">
             删除
-        </a>
+          </a>
         </span>
       ),
     }
   ];
 }
 
-export default class List extends Component {
+class List extends Component {
   constructor() {
     super();
     this.state = {
@@ -98,3 +100,4 @@ export default class List extends Component {
     )
   }
 }
+export default withRouter(List)

@@ -1,8 +1,8 @@
 /*
  * @Author: wangkai
  * @Date: 2018-04-28 20:58:43
- * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-07 09:12:21
+ * @Last Modified by: wangkaiwd
+ * @Last Modified time: 2018-05-19 21:01:43
  * @Desc: 餐馆列表页面
  */
 
@@ -32,6 +32,7 @@ class MyTable extends Component {
       List: {},
       Modal: {},
       itemValue: {},
+      visible: false,
     }
   }
   // 查询
@@ -57,13 +58,19 @@ class MyTable extends Component {
   }
   // 修改
   handleEdit = (record) => {
-    const { Modal } = this.state;
+    // const { Modal } = this.state;
     // console.log('modal', record);
-    Modal.setState({ visible: true, itemValue: record });
+    // Modal.setState({ visible: true, itemValue: record });
+    this.setState({ visible: true, itemValue: record });
+  }
+
+  onCancel = () => {
+    this.setState({ visible: false });
   }
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { Modal } = this.state;
+    // const { Modal } = this.state;
+    const { visible, itemValue } = this.state;
     return (
       <div className="page-content">
         <div className="search-header">
@@ -92,9 +99,16 @@ class MyTable extends Component {
           />
         </div>
         {/* 并不用让内容在点击编辑时显示，因为变量本来就是在编辑时赋值的 */}
-        <UpdateModal
-          onRef={(Modal) => this.setState({ Modal })}
-        />
+        {
+          visible &&
+          <UpdateModal
+            onRef={(Modal) => this.setState({ Modal })}
+            visible={visible}
+            itemValue={itemValue}
+            onCancel={this.onCancel}
+          />
+        }
+
       </div>
     )
   }

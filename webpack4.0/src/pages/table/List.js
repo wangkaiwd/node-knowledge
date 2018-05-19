@@ -30,13 +30,13 @@ const columns = function () {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;" onClick={() => this.props.handleEdit(record)}>编辑</a>
+          <a href="javascript:;" onClick={() => this.props.handleEdit(record)}>编辑12</a>
           <Divider type="vertical" />
           <a href="javascript:;">添加食品</a>
           <Divider type="vertical" />
           <a href="javascript:;">
             删除
-        </a>
+          </a>
         </span>
       ),
     }

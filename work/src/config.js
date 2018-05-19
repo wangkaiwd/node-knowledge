@@ -4,6 +4,11 @@ import Home from 'src/pages/home'
 import ShopInfo from 'src/pages/table'
 import Setting from 'src/pages/setting'
 import Userdist from 'src/pages/userDist/map'
+import Introduce from 'src/pages/introduce'
+import GoodsList from './pages/home/goodsList'
+import OrderList from './pages/home/orderList'
+import AddShop from './pages/addData/shop'
+import AddGoods from './pages/addData/goods'
 
 /**
  * 知识点：
@@ -36,6 +41,18 @@ export const leftNavConfig = [
         content: '店铺管理',
         component: ShopInfo
       },
+      {
+        key: '/dataManage/orderList',
+        icon: '',
+        content: '订单列表',
+        component: OrderList,
+      },
+      {
+        key: '/dataManage/goodsList',
+        icon: '',
+        content: '商品列表',
+        component: GoodsList,
+      },
     ]
   },
   {
@@ -52,6 +69,25 @@ export const leftNavConfig = [
     ]
   },
   {
+    key: '/add',
+    icon: 'file-add',
+    content: '添加数据',
+    child: [
+      {
+        key: '/add/shop',
+        icon: '',
+        content: '添加商铺',
+        component: AddShop,
+      },
+      {
+        key: '/add/goods',
+        icon: '',
+        content: '添加商品',
+        component: AddGoods,
+      }
+    ]
+  },
+  {
     key: '/setting',
     icon: 'mail',
     content: '设置',
@@ -59,9 +95,22 @@ export const leftNavConfig = [
       {
         key: '/setting/desc',
         icon: '',
-        content: '说明',
+        content: '管理员设置',
         component: Setting,
       },
+    ]
+  },
+  {
+    key: '/detail',
+    icon: 'profile',
+    content: '说明',
+    child: [
+      {
+        key: '/detail/intro',
+        icon: '',
+        content: '说明',
+        component: Introduce,
+      }
     ]
   }
 ]
