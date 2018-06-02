@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-05-06 12:40:58
  * @Last Modified by: wangakiwd
- * @Last Modified time: 2018-05-29 11:50:14
+ * @Last Modified time: 2018-05-29 17:53:46
  * @Desc: 商品信息更新模态框
  */
 import { Form, Input, Button, Row, Col, message, Modal, Cascader, Icon, Upload, Select } from 'antd';
@@ -32,7 +32,8 @@ class UpdateModal extends Component {
   // 获取表单的默认值
   getDefaultValue = () => {
     console.log(this.props.itemValue);
-    let { name, address, description, phone, category } = this.props.itemValue;
+    let { name, address, description, phone, category, image_path } = this.props.itemValue;
+    // http://images.cangdu.org/
     const categoryArr = category.split("/");
     this.props.form.setFieldsValue({
       name,
@@ -40,6 +41,8 @@ class UpdateModal extends Component {
       description,
       phone,
       category: categoryArr
+
+
     });
   }
 
