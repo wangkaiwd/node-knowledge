@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
+import { Link, hashHistory } from 'react-router'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './app.less'
 class App extends Component {
@@ -10,16 +10,19 @@ class App extends Component {
     }
   }
   render() {
+    const { action } = this.props.location;
+    console.log(action);
     return (
       <div className="app">
         <ul className="nav">
           <li><Link to="/home">首页</Link></li>
           <li><Link to="/product">商品</Link></li>
+          <button onClick={() => hashHistory.go(-1)}>返回</button>
         </ul>
         <ReactCSSTransitionGroup
           component="div"
           className="react-container"
-          transitionName="slide-in"
+          transitionName={action === 'PUSH' ? 'slide-in' : 'slide-out'}
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}
         >
