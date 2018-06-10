@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-05-06 12:40:58
  * @Last Modified by: wangakiwd
- * @Last Modified time: 2018-05-29 17:53:46
+ * @Last Modified time: 2018-06-10 19:38:16
  * @Desc: 商品信息更新模态框
  */
 import { Form, Input, Button, Row, Col, message, Modal, Cascader, Icon, Upload, Select } from 'antd';
@@ -31,9 +31,7 @@ class UpdateModal extends Component {
 
   // 获取表单的默认值
   getDefaultValue = () => {
-    console.log(this.props.itemValue);
     let { name, address, description, phone, category, image_path } = this.props.itemValue;
-    // http://images.cangdu.org/
     const categoryArr = category.split("/");
     this.props.form.setFieldsValue({
       name,
@@ -41,8 +39,6 @@ class UpdateModal extends Component {
       description,
       phone,
       category: categoryArr
-
-
     });
   }
 
@@ -66,9 +62,13 @@ class UpdateModal extends Component {
   handleChange = (file, fileList, event) => {
     // console.log('object', file, fileList, event);
   }
+  handleCustomRequest = () => {
+    fetchAddimgShop({}, res => {
+      console.log(res);
+    })
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
-    // console.log('value', this.state.itemValue);
     const formItemLayout = updateConfig.formItemLayout;
     const uploadButton = (
       <div>
@@ -162,7 +162,7 @@ class UpdateModal extends Component {
                 showUploadList={false}
                 withCredentials={true}
                 // action="https://elm.cangdu.org/v1/addimg/shop"
-                // customRequest={this.handleCustomRequest}
+                customRequest={this.handleCustomRequest}
                 onChange={this.handleChange}
                 beforeUpload={this.beforeUpload}
               >

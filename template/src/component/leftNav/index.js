@@ -9,6 +9,12 @@ import {
   message,
 } from 'antd';
 import React, { Component } from 'react';
+import Dashboard from 'src/pages/dashboard'
+import Home from 'src/pages/home'
+import ShopInfo from 'src/pages/table'
+import Setting from 'src/pages/setting'
+import Userdist from 'src/pages/userDist/map'
+import Introduce from 'src/pages/introduce'
 import { leftNavConfig } from 'src/config';
 import {
   HashRouter as Router,
@@ -98,7 +104,6 @@ export default class LeftNav extends Component {
       { content: '' },
       { content: '' },
     ];
-    // leftNavConfig
     const { pathname } = this.props.location;
     const { path } = this.props.match;
     const firstPath = pathname.slice(0, pathname.lastIndexOf('/'));
@@ -214,13 +219,18 @@ export default class LeftNav extends Component {
           />
           <Content className="leftnav-content">
             <Switch>
-              {this.createRoute(leftNavConfig)}
-              {/* 由于使用了Switch,所以在匹配到其它自己没有配置的路由会跳转到'/tab' */}
+              <Route path={`${this.props.match.path}/dashboard`} component={Dashboard} />
+              <Route path={`${this.props.match.path}/dataManage/user`} component={Home} />
+              <Route path={`${this.props.match.path}/dataManage/shop`} component={ShopInfo} />
+              <Route path={`${this.props.match.path}/charts/userdist`} component={Userdist} />
+              <Route path={`${this.props.match.path}/setting/desc`} component={Setting} />
+              <Route path={`${this.props.match.path}/detail/intro`} component={Introduce} />
               <Redirect to={`${this.props.match.path}/dashboard`} />
             </Switch>
           </Content>
         </Layout>
       </Layout >
-    );
+    )
+
   }
 }

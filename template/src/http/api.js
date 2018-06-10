@@ -1,8 +1,8 @@
 /*
  * @Author: wangkai
  * @Date: 2018-04-28 23:58:50
- * @Last Modified by: wangkaiwd
- * @Last Modified time: 2018-05-19 22:26:57
+ * @Last Modified by: wangakiwd
+ * @Last Modified time: 2018-06-10 19:30:15
  * @Desc: 项目请求接口
  */
 import dayjs from 'dayjs';
@@ -84,7 +84,7 @@ export const fetchUserCityCount = ajaxFunc('/v1/user/city/count');
 export const fetchRestaurantCategory = ajaxFunc('/shopping/v2/restaurant/category');
 
 // 上传商铺图片
-// export const fetchAddimgShop = ajaxFunc('/v1/addimg/:type', 'post');
+export const fetchAddimgShop = ajaxFunc('/v1/addimg/shop', 'post');
 
 // // 上传食品图片
 // export const fetchAddimgFood = ajaxFunc('/v1/addimg/food', 'post');

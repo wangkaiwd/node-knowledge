@@ -1,6 +1,8 @@
 const path = require('path')
 
 module.exports = {
+  // 方便调试，不会在浏览器中将es6转换为es5
+  devtool: 'inline-source-map',
   devServer: {
     port: 8080,
     contentBase: path.join(__dirname, '../dist'),
