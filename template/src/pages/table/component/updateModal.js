@@ -2,14 +2,14 @@
  * @Author: wangkai
  * @Date: 2018-05-06 12:40:58
  * @Last Modified by: wangakiwd
- * @Last Modified time: 2018-06-10 19:38:16
+ * @Last Modified time: 2018-06-28 18:02:20
  * @Desc: 商品信息更新模态框
  */
-import { Form, Input, Button, Row, Col, message, Modal, Cascader, Icon, Upload, Select } from 'antd';
+import { Form, Input, Button, Row, Col, message, Modal, Cascader, Select } from 'antd';
 const FormItem = Form.Item;
 import * as updateConfig from './config'
 import React, { Component } from 'react'
-import { fetchRestaurantCategory, fetchAddimgShop } from 'src/http/api'
+import { fetchRestaurantsUpdate } from "src/http/api"
 
 class UpdateModal extends Component {
   constructor() {
@@ -32,50 +32,33 @@ class UpdateModal extends Component {
   // 获取表单的默认值
   getDefaultValue = () => {
     let { name, address, description, phone, category, image_path } = this.props.itemValue;
+    this.setState({
+      shopImgpath: image_path
+    });
     const categoryArr = category.split("/");
     this.props.form.setFieldsValue({
       name,
       address,
       description,
       phone,
-      category: categoryArr
+      category: categoryArr,
     });
   }
 
   handleOk = () => {
-
-  }
-  // 上传图片之前
-  beforeUpload = (file) => {
-    const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
-    if (!isRightType) {
-      message.error('只能上传jpg和png文件!');
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.warning('图片必须小于 2MB!');
-    }
-  }
-  onChange = (value) => {
-    console.log(value);
-  }
-  handleChange = (file, fileList, event) => {
-    // console.log('object', file, fileList, event);
-  }
-  handleCustomRequest = () => {
-    fetchAddimgShop({}, res => {
-      console.log(res);
+    const params = this.props.form.getFieldsValue();
+    params.category = params.category.join("/");
+    params.id = this.props.itemValue.id;
+    delete params.prefix;
+    params.image_path = this.state.shopImgpath;
+    fetchRestaurantsUpdate(params, res => {
+      message.success(res.msg);
+      this.props.success();
     })
   }
   render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = updateConfig.formItemLayout;
-    const uploadButton = (
-      <div>
-        <Icon type={this.state.loading ? 'loading' : 'plus'} />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    );
     const prefixSelector = getFieldDecorator('prefix', {
       initialValue: '86',
     })(
@@ -146,28 +129,6 @@ class UpdateModal extends Component {
               >
 
               </Cascader>
-            )}
-          </FormItem>
-          <FormItem
-            {...formItemLayout}
-            label="商铺图片"
-          >
-            {getFieldDecorator('image_path', {
-
-            })(
-              <Upload
-                name="image_path"
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={false}
-                withCredentials={true}
-                // action="https://elm.cangdu.org/v1/addimg/shop"
-                customRequest={this.handleCustomRequest}
-                onChange={this.handleChange}
-                beforeUpload={this.beforeUpload}
-              >
-                {uploadButton}
-              </Upload>
             )}
           </FormItem>
         </Form>

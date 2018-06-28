@@ -5,7 +5,7 @@ import {
   fetchRestaurantsCount
 } from "src/http/api";
 import * as pagin from 'src/pages/tools/pagin';
-import { Divider, Icon } from 'antd';
+import { Divider } from 'antd';
 import { withRouter } from 'react-router-dom';
 
 const columns = function () {
@@ -34,12 +34,6 @@ const columns = function () {
       render: (text, record) => (
         <span>
           <a href="javascript:;" onClick={() => this.props.handleEdit(record)}>编辑</a>
-          <Divider type="vertical" />
-          <a href="javascript:;" onClick={() => this.props.history.push('/index/add/goods')}>添加食品</a>
-          <Divider type="vertical" />
-          <a href="javascript:;">
-            删除
-          </a>
         </span>
       ),
     }
@@ -68,7 +62,7 @@ class List extends Component {
     this.getList();
     this.getCount();
   }
-  // 获取参观列表
+  // 获取餐馆列表
   getList = (searchKey) => {
     const params = {
       ...this.pageKey,

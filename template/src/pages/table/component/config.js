@@ -1,10 +1,12 @@
 /*
  * @Author: wangkai
  * @Date: 2018-05-19 20:38:46
- * @Last Modified by: wangkaiwd
- * @Last Modified time: 2018-05-19 21:53:24
+ * @Last Modified by: wangakiwd
+ * @Last Modified time: 2018-06-28 17:55:08
  * @Desc: 编辑商品的配置页面
  */
+
+// FIXME:可以将分类列表存到本地存储，减少每次的请求次数
 import React, { Component } from 'react'
 import { fetchRestaurantCategory } from 'src/http/api'
 // 模态框配置

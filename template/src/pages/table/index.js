@@ -2,15 +2,12 @@
  * @Author: wangkai
  * @Date: 2018-04-28 20:58:43
  * @Last Modified by: wangakiwd
- * @Last Modified time: 2018-05-29 11:18:56
+ * @Last Modified time: 2018-06-28 18:14:19
  * @Desc: 餐馆列表页面
  */
 
 import React, { Component } from 'react';
 import {
-  Table,
-  Icon,
-  Divider,
   Form,
   Input,
   Row,
@@ -60,13 +57,16 @@ class MyTable extends Component {
   handleEdit = (record) => {
     this.setState({ visible: true, itemValue: record });
   }
-
+  // 更新成功
+  success = () => {
+    this.state.List.getList();
+    this.setState({ visible: false });
+  }
   onCancel = () => {
     this.setState({ visible: false });
   }
   render() {
     const { getFieldDecorator } = this.props.form;
-    // const { Modal } = this.state;
     const { visible, itemValue } = this.state;
     return (
       <div className="page-content">
@@ -103,6 +103,7 @@ class MyTable extends Component {
             visible={visible}
             itemValue={itemValue}
             onCancel={this.onCancel}
+            success={this.success}
           />
         }
 

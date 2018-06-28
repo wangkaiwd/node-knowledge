@@ -167,18 +167,11 @@ class Login extends Component {
                   <Button type="primary" onClick={this.getCode} loading={this.state.codeLoading}>获取验证码</Button>
                   :
                   <Button type="primary" disabled>
-                    <span>{this.state.countdown}</span>
-                    后继续获取
+                    <span>{this.state.countdown}</span>后继续获取
                   </Button>
                 }
               </FormItem>
               <FormItem>
-                {/* {getFieldDecorator('remember', {
-                  valuePropName: 'checked',
-                  initialValue: this.state.isChecked,
-                })(
-                  <Checkbox onChange={(e) => this.setState({ isChecked: e.target.checked })}>Remember me</Checkbox>
-                )} */}
                 <Button
                   type="primary"
                   htmlType="submit"
