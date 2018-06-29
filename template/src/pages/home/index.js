@@ -8,8 +8,8 @@ export default class Home extends Component {
     super(props);
     this.state = {
       tabConfig: [
-        { title: '管理员', key: '1', link: Admin },
-        { title: '用户', key: '2', link: User }
+        { title: '管理员', key: '1', link: Admin, params: {} },
+        { title: '用户', key: '2', link: User, params: {} }
       ]
     }
   }

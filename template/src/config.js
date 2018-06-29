@@ -5,6 +5,7 @@ import ShopInfo from 'src/pages/table'
 import Setting from 'src/pages/setting'
 import Userdist from 'src/pages/userDist/map'
 import Introduce from 'src/pages/introduce'
+import DisplayCharts from './pages/displayCharts';
 
 /**
  * 知识点：
@@ -49,8 +50,14 @@ export const leftNavConfig = [
         icon: '',
         content: '用户分布',
         component: Userdist
+      },
+      {
+        key: '/charts/displayCharts',
+        icon: '',
+        content: '综合图标',
+        component: DisplayCharts
       }
-    ]
+    ],
   },
   {
     key: '/setting',
@@ -68,12 +75,12 @@ export const leftNavConfig = [
   {
     key: '/detail',
     icon: 'profile',
-    content: '说明',
+    content: '任务管理',
     child: [
       {
         key: '/detail/intro',
         icon: '',
-        content: '说明',
+        content: '消息提示',
         component: Introduce,
       }
     ]

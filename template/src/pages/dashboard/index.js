@@ -2,7 +2,7 @@
  * @Author: wangkai
  * @Date: 2018-05-06 14:20:31
  * @Last Modified by: wangakiwd
- * @Last Modified time: 2018-06-10 17:39:44
+ * @Last Modified time: 2018-06-29 14:36:59
  * @Desc: 仪表盘页面
  * 主要进行一些数据的展示
  */
@@ -27,8 +27,8 @@ class Dashboard extends Component {
       totalData: [],
     }
     this.tabConfig = [
-      { title: '当日数据', key: '1', link: Today },
-      { title: '总数据', key: '2', link: Total }
+      { title: '当日数据', key: '1', link: Today, params: {} },
+      { title: '总数据', key: '2', link: Total, params: {} }
     ]
   }
   componentWillMount = () => {

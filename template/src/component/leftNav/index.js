@@ -26,6 +26,7 @@ import {
 import Top from 'src/component/header/index'
 import "./leftNav.less"
 import * as minix from "src/utils/minix";
+import DisplayCharts from '../../pages/displayCharts';
 
 const { Meta } = Card;
 const SubMenu = Menu.SubMenu;
@@ -223,6 +224,7 @@ export default class LeftNav extends Component {
               <Route path={`${this.props.match.path}/dataManage/user`} component={Home} />
               <Route path={`${this.props.match.path}/dataManage/shop`} component={ShopInfo} />
               <Route path={`${this.props.match.path}/charts/userdist`} component={Userdist} />
+              <Route path={`${this.props.match.path}/charts/displayCharts`} component={DisplayCharts} />
               <Route path={`${this.props.match.path}/setting/desc`} component={Setting} />
               <Route path={`${this.props.match.path}/detail/intro`} component={Introduce} />
               <Redirect to={`${this.props.match.path}/dashboard`} />
