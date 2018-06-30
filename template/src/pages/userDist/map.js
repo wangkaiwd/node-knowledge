@@ -1,8 +1,8 @@
 /*
  * @Author: wangkai
  * @Date: 2018-05-06 14:31:51
- * @Last Modified by: wangkai
- * @Last Modified time: 2018-05-07 15:19:50
+ * @Last Modified by: wangkaiwd
+ * @Last Modified time: 2018-06-30 12:40:53
  * @Desc: 用户分布信息图
  */
 import React, { Component } from 'react'
@@ -17,15 +17,25 @@ class map extends Component {
     }
   }
   componentDidMount = () => {
-    this.getData();
-    // this.initCharts();
-  }
-  getData = () => {
-    fetchUserCityCount({}, res => this.setState({ city: res.user_city }, () => this.initCharts()));
-  }
-  initCharts = () => {
     const container = document.querySelector('.map-container');
     const userDistCharts = echarts.init(container);
+    this.setState({ userDistCharts }, () => {
+      this.getData();
+    })
+  }
+  getData = () => {
+    const { userDistCharts } = this.state;
+    userDistCharts.showLoading();
+    fetchUserCityCount({},
+      res => {
+        userDistCharts.hideLoading();
+        this.setState({ city: res.user_city },
+          () => this.initCharts()
+        )
+      });
+  }
+  initCharts = () => {
+    const { userDistCharts } = this.state;
     const { beijing, shanghai, hangzhou, shenzhen, qita } = this.state.city;
     const option = {
       title: {

@@ -14,7 +14,7 @@ const columns = function () {
       title: '店铺名称',
       dataIndex: 'name',
       key: 'name',
-      width: '18%',
+      width: '20%',
     },
     {
       title: '店铺地址',
@@ -26,7 +26,7 @@ const columns = function () {
       title: '店铺介绍',
       dataIndex: 'description',
       key: 'description',
-      width: '18%'
+      width: '25%'
     },
     {
       title: '操作',

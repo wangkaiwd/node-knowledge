@@ -1,8 +1,8 @@
 /*
  * @Author: wangkai
  * @Date: 2018-05-07 15:01:16
- * @Last Modified by: wangakiwd
- * @Last Modified time: 2018-06-28 13:56:43
+ * @Last Modified by: wangkaiwd
+ * @Last Modified time: 2018-06-30 15:13:22
  * @Desc: 首页趋势图页面
  */
 
@@ -125,7 +125,9 @@ class SwitchCharts extends Component {
       ]
     };
     switchCharts.setOption(option);
-    switchCharts.resize();
+    setTimeout(() => {
+      switchCharts.resize();
+    }, 8);
     window.addEventListener('resize', () => {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
