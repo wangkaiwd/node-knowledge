@@ -9,7 +9,8 @@ const webpack = require("webpack");
 module.exports = {
   plugins: [
     new HTMLPlugin({
-      template: path.join(__dirname, '../index.html')
+      template: path.join(__dirname, '../index.html'),
+      hash: true,
     }),
     // 自动加载模块，而不必到处 import 或 require 。
     new webpack.ProvidePlugin({
@@ -17,7 +18,7 @@ module.exports = {
       PropTypes: "prop-types"
     }),
     // 打包的css文件名
-    new ExtractTextPlugin("main.css"),
+    new ExtractTextPlugin("main.[hash:8].css"),
     // 模块热替换插件:当开启HRM的时候使用该插件会显示模块的相对路径，建议用于开发环境
     new webpack.NamedModulesPlugin(),
     // 模块热替换：允许在运行时更新各种模块，而无需进行完全刷新。（简称：HMR）

@@ -16,4 +16,9 @@ const hotRender = (Component) => {
     document.getElementById('box')
   );
 }
+if (module.hot) {
+  module.hot.accept('./app', () => {
+    hotRender(App);
+  })
+}
 hotRender(App);

@@ -6,11 +6,11 @@ import {
   Button,
   message,
 } from 'antd'
+import "./index.less"
 import Bread from 'src/component/bread'
 import { withRouter } from 'react-router-dom'
 import { fetchLoginSingout } from 'src/http/api'
-import "./index.less"
-const { Header, Sider, Content } = Layout;
+const { Header } = Layout;
 class Top extends Component {
   constructor(props) {
     super(props)
