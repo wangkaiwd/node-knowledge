@@ -1,11 +1,9 @@
 import {
   Menu,
   Icon,
-  Button,
   Layout,
   Card,
   Avatar,
-  Popover,
   message,
 } from 'antd';
 import React, { Component } from 'react';

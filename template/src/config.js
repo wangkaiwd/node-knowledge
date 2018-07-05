@@ -60,6 +60,19 @@ export const leftNavConfig = [
     ],
   },
   {
+    key: '/detail',
+    icon: 'profile',
+    content: '任务管理',
+    child: [
+      {
+        key: '/detail/intro',
+        icon: '',
+        content: '消息提示',
+        component: Introduce,
+      }
+    ]
+  },
+  {
     key: '/setting',
     icon: 'mail',
     content: '设置',
@@ -72,17 +85,4 @@ export const leftNavConfig = [
       },
     ]
   },
-  {
-    key: '/detail',
-    icon: 'profile',
-    content: '任务管理',
-    child: [
-      {
-        key: '/detail/intro',
-        icon: '',
-        content: '消息提示',
-        component: Introduce,
-      }
-    ]
-  }
 ]
