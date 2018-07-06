@@ -75,12 +75,12 @@ export const leftNavConfig = [
   {
     key: '/setting',
     icon: 'mail',
-    content: '设置',
+    content: '说明',
     child: [
       {
         key: '/setting/desc',
         icon: '',
-        content: '管理员设置',
+        content: '简介',
         component: Setting,
       },
     ]
