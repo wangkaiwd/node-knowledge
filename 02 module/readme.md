@@ -108,3 +108,29 @@ function require(/* ... */) {
   return module.exports;
 }
 ```
+
+#### 模块之间的循环引用
+假设我们有这样一种场景： 模块`a.js`依赖于`b.js`中的某个方法，而模块`b.js`也同样依赖于`a.js`中的某个方法，这样的话会不会造成死循环呢？ 
+
+笔者这里谢了一个`demo`来重现这个问题，帮助我们更好的理解模块之间的相互引用：  
+```js
+// demo05.js
+const demo6 = require('./demo06');
+console.log('I am demo5', demo6);
+module.exports = { demo5: 'demo5' };
+
+// demo06.js
+const demo5 = require('./demo05');
+console.log('I am demo6', demo5);
+module.exports = { demo6: 'demo6' };
+```
+执行结果如下（我们可以先猜一下）：
+```text
+I am demo6 {}
+I am demo5 { demo6: 'demo6' }
+``` 
+所以我们可以得出以下执行过程： 
+1. 运行`node demo05.js`
+2. 首先引入模块`demo06.js`,并且执行`demo06.js`,通过变量`demo6`来接收模块`demo06.js`通过`module.exports`导出的对象
+3. 在执行`demo06.js`的过程中，引入了`demo05.js`，而由于`demo05.js`已经执行了一部分，由于缓存原因，并不会重新执行，此时`demo05.js`中的`module.exports`还是初始值`{}`。所以变量`demo5`为`{}`。
+4. `demo05.js`在引入`demo06.js`后继续执行后续代码
