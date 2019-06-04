@@ -73,4 +73,38 @@ console.log(require.cache);
 
 ### `exports`和`module.exports`
 我们先看一下`NodeJs`官方对`exports`的定义：  
-> `exports`变量
+> `exports`变量是在模块的文件级作用域内可用的，且在模块执行之前赋值给`module.expors`
+
+这句话的大概意思是说： `exports`并不是一个全局变量，只在模块文件内有效，并且在每个模块文件(`js`文件)执行之前将`module.exports`的值赋值给`exports`。即相当于在每个`js`文件的开头执行了如下代码：  
+```js
+exports = module.exports
+```
+这意味着`exports`和`module.exports`指向了同一片内存空间，当为`exports`或者`module.exports`重新赋值的时候，它们将不再指向同一个引用，而我们`requie`引入的一直都是`module.exports`导出的内容。  
+```js
+// demo04.js
+// 本质上来讲：exports是module.exports的一个引用，它们指向同一片内存空间
+// exports = module.exports
+exports.a = 1;
+module.exports = { b: 2 }; // 当引用发生变化的时候，exports不再是module.exports的快捷方式
+```
+这时模块暴露出来的对象是`{b:2}`。
+
+官方也对这种行为进行了假设实现：  
+```js
+function require(/* ... */) {
+  // 一个全局的module对象
+  const module = { exports: {} };
+  // 这里自执行函数传参时进行了赋值： exports = module.exports
+  ((module, exports) => {
+    // 模块代码在这。在这个例子中，定义了一个函数。
+    function someFunc() {}
+    exports = someFunc;
+    // 此时，exports 不再是一个 module.exports 的快捷方式，
+    // 且这个模块依然导出一个空的默认对象。
+    module.exports = someFunc;
+    // 此时，该模块导出 someFunc，而不是默认对象。
+  })(module, module.exports);
+  // 最终导出的一直都是module.exports,只不过可以通过exports来更改它们的引用，间接的改变module.exports
+  return module.exports;
+}
+```
