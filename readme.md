@@ -6,3 +6,8 @@
 ### `NodeJS`基础知识
 * [`NodeJs`模块化](./02%20module/readme.md)
 * 事件执行机制
+
+### `NodeJs`工具整理
+* `nrm`
+* `git-open`
+* `tldr`
