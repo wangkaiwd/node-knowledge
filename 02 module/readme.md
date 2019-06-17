@@ -1,7 +1,10 @@
-## `javascript`模块化
+## 重新理解`NodeJs`的模块化
+> 原文地址： 
+### `javascript`模块化
 * `AMD` ： Asynchronous Module Definition
 * `CMD` : Common Module Definition
 * `UMD` : Universal Module Definition
+* `CommonJS`: `Node`采用该模块化方式
 * `ES6`模块化
 
 推荐文章：  
@@ -26,7 +29,7 @@ const demo2 = require('./demo02');
 console.log('after require');
 demo2();
 ```
-接下来我们当前目录中打开命令行窗口，输入`node demo02.js`：  
+接下来我们在当前目录中打开命令行窗口，输入`node demo02.js`：  
 ```
 before require
 1
@@ -51,7 +54,7 @@ after require
 Hi, I am module demo2
 Hi, I am module demo2
 ```
-输出结果大概告诉我们这样一件事： 在首次引入某个模块的时候，`NodeJs`会对模块内的代码进行缓存进行缓存，而当我们再次引入该模块时，会通过缓存来读取导出的内容，模块内的代码并不会重新执行。  
+输出结果大概告诉我们这样一件事： 在首次引入某个模块的时候，`NodeJs`会对模块内的代码进行缓存，而当我们再次引入该模块时，会通过缓存来读取导出的内容，模块内的代码并不会重新执行。  
 
 我们可以通过`require.cache`属性来看到`NodeJs`对模块的缓存： 
 ```js
@@ -79,7 +82,7 @@ console.log(require.cache);
 ```js
 exports = module.exports
 ```
-这意味着`exports`和`module.exports`指向了同一片内存空间，当为`exports`或者`module.exports`重新赋值的时候，它们将不再指向同一个引用，而我们`requie`引入的一直都是`module.exports`导出的内容。  
+这意味着`exports`和`module.exports`指向了同一片内存空间，当为`exports`或者`module.exports`重新赋值的时候，它们将不再指向同一个引用，**而我们`requie`引入的一直都是`module.exports`导出的内容**。  
 ```js
 // demo04.js
 // 本质上来讲：exports是module.exports的一个引用，它们指向同一片内存空间
@@ -112,7 +115,7 @@ function require(/* ... */) {
 #### 模块之间的循环引用
 假设我们有这样一种场景： 模块`a.js`依赖于`b.js`中的某个方法，而模块`b.js`也同样依赖于`a.js`中的某个方法，这样的话会不会造成死循环呢？ 
 
-笔者这里谢了一个`demo`来重现这个问题，帮助我们更好的理解模块之间的相互引用：  
+笔者这里写了一个`demo`来重现这个问题，帮助我们更好的理解模块之间的相互引用：  
 ```js
 // demo05.js
 const demo6 = require('./demo06');
@@ -130,7 +133,11 @@ I am demo6 {}
 I am demo5 { demo6: 'demo6' }
 ``` 
 所以我们可以得出以下执行过程： 
-1. 运行`node demo05.js`
+1. 命令行执行`node demo05.js`
 2. 首先引入模块`demo06.js`,并且执行`demo06.js`,通过变量`demo6`来接收模块`demo06.js`通过`module.exports`导出的对象
-3. 在执行`demo06.js`的过程中，引入了`demo05.js`，而由于`demo05.js`已经执行了一部分，由于缓存原因，并不会重新执行，此时`demo05.js`中的`module.exports`还是初始值`{}`。所以变量`demo5`为`{}`。
+3. 在执行`demo06.js`的过程中，又引入了`demo05.js`，而由于`demo05.js`已经执行了一部分，由于缓存原因，并不会重新执行，此时`demo05.js`中的`module.exports`还是初始值`{}`。所以变量`demo5`为`{}`。
 4. `demo05.js`在引入`demo06.js`后继续执行后续代码
+
+可以看出`nodeJs`对于模块之间的递归引用进行了优化，并不会引发死循环，但是需要注意的是在引入的时候要注意代码的执行顺序，否则可能会取不到对应的变量。
+
+到这里，小伙伴在`NodeJs`中使用`require`进行引入以及通过`module.exports`来导出文件时的执行逻辑有了更清晰的认识呢？  
