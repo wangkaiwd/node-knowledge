@@ -6,11 +6,15 @@ const server = http.createServer();
 // http.Server类
 // request：每次请求都会触发
 server.on('request', (request, response) => {
-  const { url, headers, method } = request;
-  console.log('request some property', url, headers, method);
-  response.end('hi');
-  console.log('url', request.url);
-  console.log('有人请求了');
+  let body = '';
+  // 继承自stream.Readable,在这个类上有对应的data和end事件
+  request.on('data', (chunk: string) => {
+    body += chunk;
+  });
+  request.on('end', () => {
+    console.log('已没有数据');
+    response.end(body);
+  });
 });
 // server.listen: 启动HTTP服务器监听连接
 server.listen(PORT, () => {
