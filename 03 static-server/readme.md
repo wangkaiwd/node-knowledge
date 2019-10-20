@@ -18,3 +18,10 @@
 1. `request`事件中的`request`参数是`http.IncomingMessage`类，其对应的方法大概浏览一遍
 2. 文档中显示`http.IncomingMessage`类又继承自`stream.Readable`
 3. 在`stream.Readable`类中发现`data`和`end`事件
+
+
+### 费曼学习法
+今天新接触的学习方法，运用起来大概如下：
+1. 通过思维导图记录所学知识点
+2. 花时间复述思维导图中记录的内容，针对其中无法复述的内容进行针对学习
+3. 当将思维导图的内容完全记忆后，将知识总结为文章进行分享

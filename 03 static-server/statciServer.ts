@@ -16,7 +16,8 @@ server.on('request', (request, response) => {
   });
   request.on('end', () => {
     console.log('已没有数据');
-    response.end(body);
+    response.statusCode = 404;
+    response.end();
   });
 });
 // server.listen: 启动HTTP服务器监听连接
