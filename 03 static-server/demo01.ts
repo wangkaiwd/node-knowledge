@@ -17,6 +17,11 @@ server.on('request', (request, response) => {
   request.on('end', () => {
     console.log('已没有数据');
     response.statusCode = 404;
+    response.setHeader('xxxx', 'I am wk');
+    // 发送一块响应主体。可以多次调用该方法以提供连续的相应主体片段
+    response.write('1');
+    response.write('2');
+    response.write('3');
     response.end();
   });
 });
