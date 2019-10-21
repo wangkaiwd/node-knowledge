@@ -12,7 +12,16 @@ server.on('request', (request, response) => {
   let { pathname } = url.parse(requestUrl);
   pathname = pathname === '/' ? '/index.html' : pathname;
   fs.readFile(absPath(pathname!), (err, data) => {
-    if (err) return console.log(err);
+    if (err) {
+      console.log(err.errno === -2);
+      if (err.errno === -2) {
+        fs.readFile(absPath('/404.html'), (err, data) => {
+          if (err) return console.log(err);
+          response.end(data);
+        });
+      }
+      return console.log(err);
+    }
     response.end(data);
   });
 });
