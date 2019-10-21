@@ -2,6 +2,7 @@ import fs from 'fs';
 import * as path from 'path';
 
 const isFileExist = (path: string, callback: (isExist: boolean) => void): void => {
+  // tests a user's permissions for the file or directory specified by path
   fs.access(path, fs.constants.F_OK, (err) => {
     callback(!err);
   });
