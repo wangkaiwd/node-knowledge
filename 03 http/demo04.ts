@@ -10,7 +10,7 @@ server.on('request', (request: IncomingMessage, response) => {
     method,
     headers,
     path: url,
-    host: 'cnodejs.org'
+    host: 'nodejs.cn'
   }, (responseProxy: IncomingMessage) => {
     const { headers } = responseProxy;
     for (const key in headers) {
