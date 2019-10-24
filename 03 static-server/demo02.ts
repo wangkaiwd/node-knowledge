@@ -1,7 +1,7 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
-import * as url from 'url';
+import url from 'url';
 
 const PORT = 8888;
 const server = http.createServer();
@@ -13,7 +13,6 @@ server.on('request', (request, response) => {
   pathname = pathname === '/' ? '/index.html' : pathname;
   fs.readFile(absPath(pathname!), (err, data) => {
     if (err) {
-      console.log(err.errno === -2);
       if (err.errno === -2) {
         fs.readFile(absPath('/404.html'), (err, data) => {
           if (err) return console.log(err);
