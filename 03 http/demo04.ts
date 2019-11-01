@@ -1,5 +1,4 @@
 import http, { IncomingMessage } from 'http';
-import * as https from 'https';
 
 const PORT = 8888;
 const server = http.createServer();
