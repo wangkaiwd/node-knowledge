@@ -18,3 +18,5 @@ docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:5.7
 注意：
 * `docker`运行的容器默认不会持久化（容器被删掉，数据会消失）
 * 学习阶段不需要持久化
+
+### `MySQL`常用命令
