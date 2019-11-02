@@ -39,4 +39,8 @@ docker exec -it mysql1 bash
 * `show databases;`: 查看数据库列表
 * `use xxx;`: 选择使用`xxx`数据库
 * `show tables;`: 查看所有表
-* `select * from xx`: 查询`xx`表里的内容 
+* `select * from xx;`: 查询`xx`表里的内容
+* `describe table;`: 查看一个表的字段信息 
+
+命令行中文乱码：
+![](https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/mysql-chinese-messy-code.png)
