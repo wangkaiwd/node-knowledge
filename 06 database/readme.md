@@ -45,9 +45,33 @@ docker exec -it mysql1 bash
 * `select * from xx;`: 查询`xx`表里的内容
 * `describe table;`: 查看一个表的字段信息 
 
+#### `CRUD`命令
+
+* 创建数据库
+* 创建创建表
+* 对表进行增删改查
+* 对表中的记录进行增删改查
+
+在`DevDocs`中开启`postgresql`进行命令文档查询
+
 命令行中文乱码：
 ![](https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/mysql-chinese-messy-code.png)
 
 ### `node.js`连接`MySQL`
+在`node.js`中我们通过`mysql`这个第三方模块来帮助我们连接数据库
 
-### 
+### `MySQL`数据类型
+> 官方文档在这里：[戳我](https://dev.mysql.com/doc/refman/8.0/en/data-type-overview.html)
+
+#### 数值类型
+#### 字符串类型
+#### 日期和时间类型
+
+**ISO 8601**  
+通过`ISO 8601`我们可以更好的进行前后端交互
+
+如果是时间戳的话会遇到`*1000`和`/1000`的问题
+
+
+
+
