@@ -26,6 +26,9 @@ docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:5.7
 * `docker rm mysql1`: 删除容器，必要时可以加`-f`选项
 *  `docker run`: 启动新容器
 
+命令行常识： 
+* `ctrl+c`: 中断当前操作，比如你命令输错了
+* `ctrl+d`: 用于退出，如退出`mysql`和`bash`
 ### 用命令行连接`MySQL`
 
 `docker`运行`MySQL`:  
@@ -44,3 +47,7 @@ docker exec -it mysql1 bash
 
 命令行中文乱码：
 ![](https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/mysql-chinese-messy-code.png)
+
+### `node.js`连接`MySQL`
+
+### 
