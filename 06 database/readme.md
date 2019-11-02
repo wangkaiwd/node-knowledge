@@ -16,7 +16,27 @@ docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:5.7
 ```
 
 注意：
-* `docker`运行的容器默认不会持久化（容器被删掉，数据会消失）
+* `docker`运行的容器默认不会持久化（重新启动容器，数据会消失）
 * 学习阶段不需要持久化
 
-### `MySQL`常用命令
+### `docker`常用命令
+* `docker ps`: 查看容器运行状态
+* `docker kill mysql1`: 关掉容器
+* `docker container run mysql1`: 开启刚关掉的容器
+* `docker rm mysql1`: 删除容器，必要时可以加`-f`选项
+*  `docker run`: 启动新容器
+
+### 用命令行连接`MySQL`
+
+`docker`运行`MySQL`:  
+```shell script
+docker exec -it mysql1 bash
+```
+这行命令会进入容器，容器里有一个`Linux`系统，我们可以在这个系统里运行`mysql`
+
+### `MySQL`命令
+* `mysql -u root -p`回车，输入密码 123456
+* `show databases;`: 查看数据库列表
+* `use xxx;`: 选择使用`xxx`数据库
+* `show tables;`: 查看所有表
+* `select * from xx`: 查询`xx`表里的内容 
