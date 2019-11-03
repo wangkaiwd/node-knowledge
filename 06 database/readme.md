@@ -76,21 +76,26 @@ docker exec -it mysql1 bash
 * `decimal`
 * `float`
 * `double`
+* `serial`
 
 #### 字符串类型
 * `char`: 一个固定长度的字符串 
 * `varchar`: 可变长度的字符串
 * `binary`: 二进制字节字符串
-* `varbinary`： 可变长度的二进制字符串
-* `blob`: 
-* `text`
-* `enum`
-* `set`
-* `serial`
+* `varbinary`: 可变长度的二进制字符串
+* `blob`: 很长的二进制 
+* `text`: 很长的文本（存储一篇博客）
+* `enum`: 只能从指定值中取一个值
+* `set`: 从指定值中取一个或多个
 
 `var`是`variable`的缩写，译为可变的、变化的。`char(100)`就算你只存一个字符，他也会占据100个字符的长度，剩余内容用空格补齐。而`varchar(100)`表示最多可以存100个字符长度的字符，可以为我们节省空间。
 
 #### 日期和时间类型
+* `date`
+* `datetime`
+* `timestamp`
+* `time`
+* `year`
 
 **ISO 8601**  
 通过`ISO 8601`我们可以更好的进行前后端交互
