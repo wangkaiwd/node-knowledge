@@ -47,10 +47,9 @@ docker exec -it mysql1 bash
 
 #### `CRUD`命令
 
-* 创建数据库
-* 创建创建表
-* 对表进行增删改查
-* 对表中的记录进行增删改查
+*  `create database foo;`: 创建`foo`数据库
+* `create table authors;`: 创建创建`author`表
+* `insert into authors (id,name,email) values(1,"小明","test@gmail.com");`: 为`authors`表插入一条数据
 
 在`DevDocs`中开启`postgresql`进行命令文档查询
 
@@ -60,6 +59,46 @@ docker exec -it mysql1 bash
 
 ### `node.js`连接`MySQL`
 在`node.js`中我们通过`mysql`这个第三方模块来帮助我们连接数据库
+
+下面是`node.js`连接数据库的代码：  
+```typescript
+import { FieldInfo, MysqlError } from 'mysql';
+
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '123456',
+});
+
+connection.connect();
+// 1. 不存在的情况下创建表： if not exists
+// 2. mysql utf8 bug: 不明白为什么在命令行中文会显示??
+
+// 不存在foo数据库的情况下进行创建
+connection.query('CREATE DATABASE IF NOT EXISTS foo DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci', (error: MysqlError, results: any, fields: FieldInfo) => {
+  if (error) throw error;
+});
+
+// 使用foo数据库
+connection.query('USE foo', () => {
+
+});
+
+// 在foo数据库中创建authors表，并定义字段及其类型： id, name, email
+connection.query('CREATE TABLE IF NOT EXISTS authors (id INT, name VARCHAR(20), email VARCHAR(20))');
+
+// 为authors表中插入一行记录
+connection.query('INSERT INTO authors (id,name,email) VALUES(1,"小明","test@gmail.com")');
+
+// 查询authors表中的所有内容
+connection.query(`SELECT * FROM authors`, (err: MysqlError, result: any, fields: FieldInfo) => {
+  if (err) {throw err;}
+  console.log('select result:', result, fields);
+});
+
+connection.end();
+```
 
 ### `MySQL`数据类型
 > 官方文档在这里：[戳我](https://dev.mysql.com/doc/refman/8.0/en/data-type-overview.html)
