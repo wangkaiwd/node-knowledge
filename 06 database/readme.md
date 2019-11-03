@@ -1,7 +1,12 @@
 ## `node.js`操作数据库
 ### 安装`docker`
-1. 什么是`docker`
-2. 为什么要安装`docker`
+在安装之前，我们先介绍一下`docker`。
+
+`docker`是一个旨在通过使用`container`来让创建、部署和运行应用程序更加简单的工具。`container`允许开发人员将一个应用程序所需要的全部内容打包到一起，例如库和其它依赖，并将其全部打包为一个软件包。通过这样做，借助于容器，开发者能确保应用可以在其它任何机器上运行，而不用管机器可能拥有的自定义配置会与用来编写和测试代码的机器会有所不同。
+
+这里有关于`docker`的详细介绍: [`What is Docker?`](https://opensource.com/resources/what-docker)
+
+`docker`的安装地址在这里：[戳我](https://hub.docker.com/)
 
 如何查看`docker`是否安装成功:  
 ```shell script
