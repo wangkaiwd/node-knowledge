@@ -65,6 +65,8 @@ docker exec -it mysql1 bash
 > 官方文档在这里：[戳我](https://dev.mysql.com/doc/refman/8.0/en/data-type-overview.html)
 
 #### 数值类型
+> [文档传送门](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-overview.html) 
+
 * `bit`
 * `tinyint`
 * `bool`
@@ -79,6 +81,8 @@ docker exec -it mysql1 bash
 * `serial`
 
 #### 字符串类型
+> [文档传送门](https://dev.mysql.com/doc/refman/8.0/en/string-type-overview.html)
+
 * `char`: 一个固定长度的字符串 
 * `varchar`: 可变长度的字符串
 * `binary`: 二进制字节字符串
@@ -91,6 +95,8 @@ docker exec -it mysql1 bash
 `var`是`variable`的缩写，译为可变的、变化的。`char(100)`就算你只存一个字符，他也会占据100个字符的长度，剩余内容用空格补齐。而`varchar(100)`表示最多可以存100个字符长度的字符，可以为我们节省空间。
 
 #### 日期和时间类型
+> [文档传送门](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-type-overview.html)
+
 * `date`
 * `datetime`
 * `timestamp`
