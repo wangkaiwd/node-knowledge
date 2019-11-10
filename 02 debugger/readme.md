@@ -19,6 +19,7 @@
 
 4. 可选的：
     * 指定自定义`Node.js`启动时的`Node Parameters`(`Node`参数)。 
+    * 在应用程序参数输入栏中,指定`Node.js`细节参数在启动时通过`process.argv`数组传递给应用程序。
 
 ### 命令行和`chrome`调试
 在`Node.js`执行时传入`--inspect-brk`标志，如：  
