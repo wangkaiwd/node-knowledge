@@ -14,7 +14,7 @@ docker run hello-world
 ```
 ![](https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/docker-install-hello-world.png)
 
-### 使用`docker`安装`MySQL` 
+### [使用`docker`安装`MySQL`](https://hub.docker.com/_/mysql) 
 执行下边的命令安装`MySQL`:
 ```shell script
 docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:5.7.27
@@ -24,7 +24,7 @@ docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:5.7
 * `docker`运行的容器默认不会持久化（重新启动容器，数据会消失）
 * 学习阶段不需要持久化
 
-### `docker`常用命令
+### [`docker`常用命令](https://docs.docker.com/engine/reference/commandline/docker/)
 * `docker ps`: 查看容器运行状态
 * `docker kill mysql1`: 关掉容器
 * `docker container run mysql1`: 开启刚关掉的容器
@@ -34,7 +34,7 @@ docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:5.7
 命令行常识： 
 * `ctrl+c`: 中断当前操作，比如你命令输错了
 * `ctrl+d`: 用于退出，如退出`mysql`和`bash`
-### 用命令行连接`MySQL`
+### [用命令行连接`MySQL`](https://dev.mysql.com/doc/refman/8.0/en/connecting-disconnecting.html)
 
 `docker`运行`MySQL`:  
 ```shell script
@@ -42,7 +42,7 @@ docker exec -it mysql1 bash
 ```
 这行命令会进入容器，容器里有一个`Linux`系统，我们可以在这个系统里运行`mysql`
 
-### `MySQL`命令
+### [`MySQL`命令](http://g2pc1.bu.edu/~qzpeng/manual/MySQL%20Commands.htm)
 * `mysql -u root -p`回车，输入密码 123456
 * `show databases;`: 查看数据库列表
 * `use xxx;`: 选择使用`xxx`数据库
