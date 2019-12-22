@@ -1,4 +1,4 @@
-## Stream 流
+## [Stream 流](http://nodejs.cn/api/stream.html#stream_readable_streams)
 ### 三个例子简单认识Stream
 `stream`的优点： 将比较大的数据分块进行传输
 ### Stream对象的原型链
