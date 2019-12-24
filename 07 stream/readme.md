@@ -13,7 +13,7 @@ ReadStream => Readable.prototype => Stream.prototype => EventEmitter.prototype =
 方法：
 * pipe()
 * resume()
-* paused()
+* pause()
 
 ##### Writable Stream
 事件：
@@ -33,6 +33,15 @@ ReadStream => Readable.prototype => Stream.prototype => EventEmitter.prototype =
 * Transform: 在写入和读取数据时能**修改或转换数据**的`Duplex`流
 
 ### `Readable`和`Writable`的特点
+#### Readable Stream
+俩种读取模式： 
+* 流动模式(`flowing`)
+* 暂停模式(`paused`)
+
+可读流默认处于暂停状态，以下方式之一会将流切换到流动(`flowing`)模式：
+1. 添加一个`data`事件处理函数
+2. 调用`stream.resume()`方法
+3. 调用`stream.pipe()`方法发送数据到可写流
 
 ### 写的不错的文章
 * [Node.js Stream:Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
