@@ -50,6 +50,10 @@ ReadStream => Readable.prototype => Stream.prototype => EventEmitter.prototype =
 [`finished`](http://nodejs.cn/api/stream.html#stream_event_finish)事件:    
 调用`stream.end()`且缓冲数据都已传给底层系统之后触发
 
+### 创建自己的流
+
+### `Transform`流举例
+
 ### 写的不错的文章
 * [Node.js Stream:Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
 * [Understanding Streams in Node.js](https://nodesource.com/blog/understanding-streams-in-nodejs/)
