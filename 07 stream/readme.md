@@ -4,6 +4,27 @@
 ### Stream对象的原型链
 ReadStream => Readable.prototype => Stream.prototype => EventEmitter.prototype => Object.prototype
 
+#### 比较重要的事件方法
+##### Readable Stream
+事件：
+* data
+* end
+
+方法：
+* pipe()
+* resume()
+* paused()
+
+##### Writable Stream
+事件：
+* drain
+* finish
+
+方法：
+* write
+* end
+
+
 ### [Stream的类型](http://nodejs.cn/api/stream.html#stream_types_of_streams)
 ### `Readable`和`Writable`的特点
 
