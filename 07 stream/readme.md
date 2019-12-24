@@ -17,7 +17,7 @@ ReadStream => Readable.prototype => Stream.prototype => EventEmitter.prototype =
 
 ##### Writable Stream
 事件：
-* drain
+* drain: 
 * finish
 
 方法：
@@ -26,6 +26,12 @@ ReadStream => Readable.prototype => Stream.prototype => EventEmitter.prototype =
 
 
 ### [Stream的类型](http://nodejs.cn/api/stream.html#stream_types_of_streams)
+`Node.js`中有四种基本的流类型：
+* Writable: 可写入数据的流
+* Readable: 可读取数据的流
+* Duplex: 既可读又可写的流
+* Transform: 在写入和读取数据时能**修改或转换数据**的`Duplex`流
+
 ### `Readable`和`Writable`的特点
 
 ### 写的不错的文章
