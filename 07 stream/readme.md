@@ -43,6 +43,13 @@ ReadStream => Readable.prototype => Stream.prototype => EventEmitter.prototype =
 2. 调用`stream.resume()`方法
 3. 调用`stream.pipe()`方法发送数据到可写流
 
+#### Writable Stream
+**[`drain`](http://nodejs.cn/api/stream.html#stream_event_drain)事件**  
+如果调用`stream.write(chunk)`返回`false`, 当适合恢复写入数据到流的时候将会触发`drain`事件
+
+[`finished`](http://nodejs.cn/api/stream.html#stream_event_finish)事件:    
+调用`stream.end()`且缓冲数据都已传给底层系统之后触发
+
 ### 写的不错的文章
 * [Node.js Stream:Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
 * [Understanding Streams in Node.js](https://nodesource.com/blog/understanding-streams-in-nodejs/)
