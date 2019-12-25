@@ -52,8 +52,6 @@ ReadStream => Readable.prototype => Stream.prototype => EventEmitter.prototype =
 
 ### 创建自己的流
 
-#### 创建一个简单的可写流
-
 
 ### `Transform`流举例
 
