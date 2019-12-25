@@ -4,6 +4,7 @@ interface IInStream extends Readable {
   index?: number
 }
 const inStream: IInStream = new Readable({
+  // 调用read时推数据
   read (this: IInStream, size) {
     this.push(String(this.index));
     this.index!++;
