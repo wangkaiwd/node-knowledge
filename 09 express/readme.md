@@ -17,4 +17,6 @@ curl -s -v -o /dev/null http://www.baidu.com
 > * `-o /dev/null`可以隐藏`HTML`文本，防止内容过多影响显示
 >
 > 关于`/dev/null`的相关资料：[wiki](https://zh.wikipedia.org/wiki//dev/null)
-###
+### 请求和响应
+浏览器会使用`MIME`类型(不是文件扩展)来决定如何处理一个`URL`。
+* [Incomplete list of MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)
