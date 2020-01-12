@@ -7,11 +7,12 @@ const readableStream = fs.createReadStream('../yarn.lock', {
   highWaterMark: 1024,
 });
 let count = 0;
-console.log('readableStream', readableStream.isPaused());
+console.log('isPaused', readableStream.isPaused());
 readableStream.on('data', (chunk) => {
   console.log(chunk.toString());
   console.log(++count);
   readableStream.pause();
+  console.log('isPaused', readableStream.isPaused());
   setTimeout(() => {
     readableStream.resume();
   }, 3000);
