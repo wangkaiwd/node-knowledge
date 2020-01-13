@@ -14,4 +14,7 @@ setTimeout(() => {
 // setTimeout(readableStream.resume, 3000);
 ```
 
-### 
+### File Descriptor
+* [file descriptor](https://zh.wikipedia.org/wiki/%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6)
+* 0: stdin, 1: stdout, 2: stderr
+* [What is the use of fd (file descriptor) in Node.js?](https://stackoverflow.com/questions/36771266/what-is-the-use-of-fd-file-descriptor-in-node-js)
