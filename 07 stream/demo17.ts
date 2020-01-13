@@ -34,5 +34,5 @@ for (let i = 0; i < 1000; i++) {
 
 // const readableStream = fs.createReadStream('../yarn.lock');
 // const writableStream = fs.createWriteStream('./out.txt');
-//
+
 // readableStream.pipe(writableStream);

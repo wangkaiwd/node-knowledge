@@ -59,4 +59,5 @@ ReadStream => Readable.prototype => Stream.prototype => EventEmitter.prototype =
 * [Node.js Stream:Everything you need to know](https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/)
 * [Understanding Streams in Node.js](https://nodesource.com/blog/understanding-streams-in-nodejs/)
 * [Node.js streams cheatsheet](https://devhints.io/nodejs-stream)
+* [数据流中的积压问题](https://nodejs.org/zh-cn/docs/guides/backpressuring-in-streams/)
 
