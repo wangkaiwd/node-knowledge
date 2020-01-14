@@ -38,11 +38,15 @@ rs.on('data', (chunk) => {
   if (!drained) {
     rs.pause();
   }
-  setTimeout(() => {
-    rs.resume();
-  }, 3000);
+  // setTimeout(() => {
+  //   rs.resume();
+  // }, 3000);
 });
 
+// 可写流中的内容流干：可以继续写入数据时触发
+ws.on('drain', () => {
+  rs.resume();
+});
 rs.on('end', () => {
   console.log('done');
 });
