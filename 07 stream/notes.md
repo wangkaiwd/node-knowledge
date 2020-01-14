@@ -26,3 +26,12 @@ setTimeout(() => {
 ### 实现`pipe`
 * 通过实现自己的可读、可写流实现`pipe`(这里会涉及到背压问题)
 * 查看`Node.js`中`pipe`源码
+
+
+### 例子
+* 商品秒杀(背压问题)
+
+### objectMode
+
+* `Node.js`创建的流都是运作在字符串和`Buffer`(或`Uint8Array`),流中也可以使用`JavaScript`中的类型(出了`null`)
+* 创建流时，可以设置`objectMode`选项把流实例切换到对象模式
