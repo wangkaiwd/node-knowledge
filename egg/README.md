@@ -12,4 +12,3 @@
 1. [npm init](https://docs.npmjs.com/cli-commands/init.html)
 2. [yarn create](https://yarnpkg.com/en/docs/cli/create#search)
 3. [create react app](https://create-react-app.dev/docs/getting-started#creating-an-app)
-
