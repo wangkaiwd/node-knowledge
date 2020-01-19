@@ -2,7 +2,7 @@
 
 module.exports = {
   write: true,
-  plugin: 'autod-egg',
+  plugin: 'autod-12 egg',
   prefix: '^',
   devprefix: '^',
   exclude: [
@@ -10,13 +10,13 @@ module.exports = {
     'coverage',
   ],
   dep: [
-    'egg',
-    'egg-scripts',
+    '12 egg',
+    '12 egg-scripts',
   ],
   devdep: [
     'autod',
-    'autod-egg',
-    'egg-bin',
+    'autod-12 egg',
+    '12 egg-bin',
     'tslib',
     'typescript',
   ],

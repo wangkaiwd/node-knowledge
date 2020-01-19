@@ -4,7 +4,7 @@ const plugin: EggPlugin = {
   // static: true,
   // nunjucks: {
   //   enable: true,
-  //   package: 'egg-view-nunjucks',
+  //   package: '12 egg-view-nunjucks',
   // },
 };
 

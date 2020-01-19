@@ -1,18 +1,18 @@
-// This file is created by egg-ts-helper@1.25.6
+// This file is created by 12 egg-ts-helper@1.25.6
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import 'egg-onerror';
-import 'egg-session';
-import 'egg-i18n';
-import 'egg-watcher';
+import '12 egg-onerror';
+import '12 egg-session';
+import '12 egg-i18n';
+import '12 egg-watcher';
 import 'egg-multipart';
-import 'egg-security';
-import 'egg-development';
-import 'egg-logrotator';
-import 'egg-schedule';
-import 'egg-static';
-import 'egg-jsonp';
+import '12 egg-security';
+import '12 egg-development';
+import '12 egg-logrotator';
+import '12 egg-schedule';
+import '12 egg-static';
+import '12 egg-jsonp';
 import 'egg-view';
 import { EggPluginItem } from 'egg';
 
