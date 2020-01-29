@@ -1,7 +1,8 @@
-interface IProduct {
+export interface IProduct {
   id: string;
   name: string;
 }
+
 class Product {
   products: IProduct[] = [];
 
@@ -9,8 +10,8 @@ class Product {
     return this.products;
   }
 
-  add (product: IProduct) {
-    this.products.push(product);
+  add (product: IProduct[]) {
+    this.products = this.products.concat(product);
   }
 
   getProductById (id: string) {
@@ -18,4 +19,5 @@ class Product {
     return target || {};
   }
 }
+
 export default Product;

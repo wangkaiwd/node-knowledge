@@ -9,9 +9,11 @@ class ProductController extends Controller {
   }
 
   add () {
-    console.log('add', this.ctx.request);
     const { product } = this.ctx.request.body;
     productModel.add(product);
+    this.ctx.body = {
+      message: 'ok'
+    };
   }
 
   getProductById () {
@@ -19,4 +21,5 @@ class ProductController extends Controller {
     this.ctx.body = productModel.getProductById(id);
   }
 }
+
 export default ProductController;

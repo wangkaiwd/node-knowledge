@@ -1,6 +1,7 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 
 interface BizConfig {sourceUrl: string;}
+
 export default (appInfo: EggAppInfo): PowerPartial<EggAppConfig> & BizConfig => {
   const config = {} as PowerPartial<EggAppConfig>;
 
