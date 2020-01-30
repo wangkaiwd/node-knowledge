@@ -1,6 +1,8 @@
 ## egg
 
 ### Quick Start
+* [directory structure](https://eggjs.org/en/basics/structure.html)
+* [loader](https://eggjs.org/en/advanced/loader.html)
 #### 问题
 ##### 1. `npm init egg --type=simple`: 将`yarn`替换为`npm`后没有成功
 在`yarn`中对应的命令是`yarn create`
