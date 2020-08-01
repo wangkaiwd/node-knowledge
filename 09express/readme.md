@@ -29,3 +29,9 @@ curl -s -v -o /dev/null http://www.baidu.com
 #### next('route')
 这种细微的知识在文档中其实不太好找，我们可以在遇到问题的时候直接阅读`express`的源码。
 在不停反复查找源码的过程中会渐渐熟悉源码
+
+### `express API`
+三个比较重要的`api`:
+* express.json
+* express.static
+* express.Router
