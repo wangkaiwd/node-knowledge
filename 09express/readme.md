@@ -32,6 +32,6 @@ curl -s -v -o /dev/null http://www.baidu.com
 
 ### `express API`
 三个比较重要的`api`:
-* express.json
-* express.static
-* express.Router
+* [express.json](http://expressjs.com/en/4x/api.html#express.json): `Express`中内置的中间件函数。它基于`body-parser`并且用`JSON`载荷解析即将到来的请求。
+* [express.static](http://expressjs.com/en/4x/api.html#express.static)
+* [express.Router](http://expressjs.com/en/4x/api.html#express.static)
