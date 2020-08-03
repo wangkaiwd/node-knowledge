@@ -23,7 +23,7 @@ app.use(express.urlencoded());
 // });
 
 app.use((req, res) => {
-
+  console.log('req', req.xhr);
   res.send(req.body);
 });
 app.listen(3000, () => {

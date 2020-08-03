@@ -47,6 +47,12 @@ curl -s -v -o /dev/null http://www.baidu.com
 * app.verb
 * app.render
 
+`req.xxx`:
+* req.app
+* req.params
+* req.query
+* req.xhr
+
 #### 学习`api`中比较疑惑的点
 * `express.static`静态资源访问路径(没有传入的`root`)
 * `app.set`必须要在设置中间件之前开始执行
