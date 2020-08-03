@@ -31,7 +31,8 @@ curl -s -v -o /dev/null http://www.baidu.com
 在不停反复查找源码的过程中会渐渐熟悉源码
 
 ### `express API`
-三个比较重要的`api`:
+几个比较重要的`api`:
 * [express.json](http://expressjs.com/en/4x/api.html#express.json): `Express`中内置的中间件函数。它基于`body-parser`并且用`JSON`载荷解析即将到来的请求。
+* [express.urlencoded](http://expressjs.com/en/4x/api.html#express.urlencoded)
 * [express.static](http://expressjs.com/en/4x/api.html#express.static)
 * [express.Router](http://expressjs.com/en/4x/api.html#express.static)
