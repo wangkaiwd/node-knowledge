@@ -58,6 +58,11 @@ curl -s -v -o /dev/null http://www.baidu.com
 * req.param()
 * req.range()
   * http range header
+  
+`res.xxx`:
+* res.send
+* res.ret/get()
+* res.format
 
 #### 学习`api`中比较疑惑的点
 * `express.static`静态资源访问路径(没有传入的`root`)
