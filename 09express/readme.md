@@ -36,3 +36,17 @@ curl -s -v -o /dev/null http://www.baidu.com
 * [express.urlencoded](http://expressjs.com/en/4x/api.html#express.urlencoded)
 * [express.static](http://expressjs.com/en/4x/api.html#express.static)
 * [express.Router](http://expressjs.com/en/4x/api.html#express.static)
+
+`app.xxx`
+* app.set
+  * case sensitive routing
+  * views
+  * view engine(`ejs`, `pug`)
+* app.get(name)
+* app.get(path,callback[,callback...])
+* app.verb
+* app.render
+
+#### 学习`api`中比较疑惑的点
+* `express.static`静态资源访问路径(没有传入的`root`)
+* `app.set`必须要在设置中间件之前开始执行
