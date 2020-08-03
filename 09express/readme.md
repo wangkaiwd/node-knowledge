@@ -47,11 +47,17 @@ curl -s -v -o /dev/null http://www.baidu.com
 * app.verb
 * app.render
 
-`req.xxx`:
+`req.xxx` property:
 * req.app
 * req.params
 * req.query
 * req.xhr
+
+`req.xxx` method: 
+* req.get()
+* req.param()
+* req.range()
+  * http range header
 
 #### 学习`api`中比较疑惑的点
 * `express.static`静态资源访问路径(没有传入的`root`)
