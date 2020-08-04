@@ -76,6 +76,7 @@ concept：
 * Cookie
 * Session
 
-#### 学习`api`中比较疑惑的点
-* `express.static`静态资源访问路径(没有传入的`root`)
-* `app.set`必须要在设置中间件之前开始执行
+#### make me confuse question when study express api 4.x
+* access `express.static` create http server without root path in location
+  * http://localhost:3000/index.html (without `public`)
+* `app.set` must write at before all middleware
