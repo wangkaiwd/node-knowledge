@@ -61,7 +61,7 @@ curl -s -v -o /dev/null http://www.baidu.com
   
 `res.xxx`:
 * res.send
-* res.ret/get()
+* res.set/get()
 * res.format
 
 `router.xxx`
