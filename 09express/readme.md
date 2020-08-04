@@ -40,7 +40,7 @@ curl -s -v -o /dev/null http://www.baidu.com
 `app.xxx`
 * app.set
   * case sensitive routing
-  * views
+  * views: application view directory
   * view engine(`ejs`, `pug`)
 * app.get(name)
 * app.get(path,callback[,callback...])
