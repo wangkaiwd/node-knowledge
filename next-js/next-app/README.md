@@ -7,8 +7,12 @@
 * global css(import in _app.js)
 * scope css(module css)
 * scss
-* handle image resource
+* handle image resource(custom webpack configuration and next)
+* combine with typescript
 
 * 客户端渲染
 * SSG
 * SSR
+
+* 三种渲染方式使用场景
+* 分别尝试使用三种渲染方式来实现一些功能
