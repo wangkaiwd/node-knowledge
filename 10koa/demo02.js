@@ -14,9 +14,10 @@ app.use(async (ctx, next) => {
   await next();
   const time = Date.now() - start;
   ctx.set('X-Response-Time', `${time}ms`);
+  ctx.body = time;
 });
 app.use(async (ctx, next) => {
-  ctx.body = 'hello world';
+  await next();
 });
 app.listen(PORT, () => {
   console.log(`Koa started in port ${PORT}`);
