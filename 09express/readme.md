@@ -66,7 +66,13 @@ curl -s -v -o /dev/null http://www.baidu.com
 
 `router.xxx`
 
-express-generator
+express-generator: 
+* debug with webstorm combine with nodemon
+* why not use `app.listen` but use node http module for listen server
+  ```javascript
+  // 这里为什么可以传入app来创建服务
+  const server = http.createServer(app);
+  ``` 
 
 concept：
 * middleware
