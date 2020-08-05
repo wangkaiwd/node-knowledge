@@ -68,6 +68,7 @@ curl -s -v -o /dev/null http://www.baidu.com
 
 express-generator: 
 * debug with webstorm combine with nodemon
+  ![](https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/20200805155548.png)
 * why not use `app.listen` but use node http module for listen server
   ```javascript
   // 这里为什么可以传入app来创建服务
