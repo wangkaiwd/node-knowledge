@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
+import { getSortedPostsData } from '../lib/post';
 
-export default function Home () {
+export default function Home (props) {
+  console.log('props', props);
   return (
     <Layout home>
       <Head>
@@ -17,4 +19,12 @@ export default function Home () {
       </section>
     </Layout>
   );
+}
+
+// 这里的代码会在服务端执行
+export async function getStaticProps () {
+  const allPostData = getSortedPostsData();
+  return {
+    props: { allPostData }
+  };
 }
