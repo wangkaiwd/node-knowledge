@@ -13,6 +13,7 @@ export default function Home () {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Read <Link href="/posts/first-post"><a>this page</a></Link>
+          <img src="/vercel.svg" alt="Vercel Logo" className="logo"/>
         </h1>
 
         <p className={styles.description}>
