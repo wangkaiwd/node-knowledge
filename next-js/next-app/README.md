@@ -5,6 +5,7 @@
 * page/_app.js(global component)
 * Head(custom Head)
 * global css(import in _app.js)
+* import absolute path
 * scope css(module css)
 * scss
 * handle image resource(custom webpack configuration and next)
