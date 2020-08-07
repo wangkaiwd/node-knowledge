@@ -13,6 +13,7 @@
 
 * 客户端渲染
 * SSG
+  * getStaticProps: use Node.js api in this method
 * SSR
 
 * 三种渲染方式使用场景
