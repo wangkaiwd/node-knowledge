@@ -9,4 +9,6 @@
 * 预渲染和数据获取
   * SSG: fetch data at build time
     * getStaticProps
+    * getStaticPaths
   * SSR: fetch data at request time
+    * getServerSideProps
