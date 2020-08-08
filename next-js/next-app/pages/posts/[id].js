@@ -2,20 +2,21 @@ import Layout from '../../components/layout';
 import { getAllPostsIds, getPostsData } from '../../lib/post';
 
 export default function Post (props) {
-  console.log('props', props);
+  const { date, id, title, contentHtml } = props.postData;
   return (
     <Layout>
-      {props.postData.title}
+      {title}
       <br/>
-      {props.postData.id}
+      {id}
       <br/>
-      {props.postData.date}
+      {date}
+      <div dangerouslySetInnerHTML={{ __html: contentHtml }}/>
     </Layout>
   );
 }
 
-export function getStaticProps ({ params }) {
-  const postData = getPostsData(params.id);
+export async function getStaticProps ({ params }) {
+  const postData = await getPostsData(params.id);
   return {
     props: { postData }
   };

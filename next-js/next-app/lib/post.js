@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
+import remark from 'remark';
+import html from 'remark-html';
+
 const postsDir = path.join(process.cwd(), 'posts');
 const filenames = fs.readdirSync(postsDir);
 export const getSortedPostsData = () => {
@@ -36,8 +39,10 @@ export function getAllPostsIds () {
   );
 }
 
-export function getPostsData (id) {
+export async function getPostsData (id) {
   const fullContent = fs.readFileSync(path.join(postsDir, id + '.md'), 'utf8');
   const { content, data } = matter(fullContent);
-  return { id, content, ...data };
+  const processedContent = await remark().use(html).process(content);
+  const contentHtml = processedContent.toString();
+  return { id, contentHtml, content, ...data };
 }
