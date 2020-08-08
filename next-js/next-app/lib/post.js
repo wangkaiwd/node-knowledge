@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
+const postsDir = path.join(process.cwd(), 'posts');
+const filenames = fs.readdirSync(postsDir);
 export const getSortedPostsData = () => {
-  const postsDir = path.join(process.cwd(), 'posts');
-  const filenames = fs.readdirSync(postsDir);
   return filenames.map(filename => {
     const str = fs.readFileSync(path.join(postsDir, filename), 'utf8');
     const { content, data: { title, date } } = matter(str);
-    return { id: filename, content, title, date };
+    return { id: filename.replace(/\.md/g, ''), content, title, date };
   }).sort((a, b) => { // 日期从小到大排列
     if (a.date > b.date) {
       return -1;
@@ -17,3 +17,27 @@ export const getSortedPostsData = () => {
     }
   });
 };
+
+export function getAllPostsIds () {
+  // 要返回的数组格式：
+  // [
+  //   {
+  //     params: { id: 'xxx' }
+  //   }
+  // ];
+  // Next.js会根据返回自动帮我们创建对应路由，其它的地址将会返回404
+  return filenames.map(filename => {
+      return {
+        params: {
+          id: filename.replace(/\.md/g, '')
+        }
+      };
+    }
+  );
+}
+
+export function getPostsData (id) {
+  const fullContent = fs.readFileSync(path.join(postsDir, id + '.md'), 'utf8');
+  const { content, data } = matter(fullContent);
+  return { id, content, ...data };
+}

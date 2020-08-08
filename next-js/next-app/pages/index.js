@@ -3,7 +3,9 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/post';
 
-export default function Home ({ allPostsData }) {
+export default function Home (props) {
+  const { allPostsData } = props;
+  console.log('props', props);
   return (
     <Layout home>
       <Head>
@@ -34,6 +36,7 @@ export default function Home ({ allPostsData }) {
   );
 }
 
+// at build time
 // 这里的代码只会在服务端运行
 export async function getStaticProps () {
   const allPostsData = getSortedPostsData();
@@ -41,3 +44,14 @@ export async function getStaticProps () {
     props: { allPostsData }
   };
 }
+
+// 俩种形式不能一起使用
+// // at each request time
+// context contains request specific parameters
+// export async function getServerSideProps (context) {
+//   return {
+//     props: {
+//       test: 'test'
+//     }
+//   };
+// }
