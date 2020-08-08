@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
-import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/post';
+import DateTime from '../components/dateTime';
+import Link from 'next/link';
+import utilStyles from '../styles/utils.module.css';
 
 export default function Home (props) {
   const { allPostsData } = props;
-  console.log('props', props);
   return (
     <Layout home>
       <Head>
@@ -23,11 +24,16 @@ export default function Home (props) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
+              {/*href指定参数id, as 指定真实的路由路径*/}
+              <Link href="/posts/[id]" as={`/posts/${id}`}>
+                <a>
+                  {title}
+                </a>
+              </Link>
               <br/>
-              {id}
-              <br/>
-              {date}
+              <small className={utilStyles.lightText}>
+                <DateTime dateString={date}/>
+              </small>
             </li>
           ))}
         </ul>

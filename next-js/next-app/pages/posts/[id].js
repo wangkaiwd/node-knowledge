@@ -35,6 +35,7 @@ export function getStaticPaths () {
   const paths = getAllPostsIds();
   return {
     paths,
+    // any paths not returned by getStaticPaths will result in a 404 page
     fallback: false
   };
 }
